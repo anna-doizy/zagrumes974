@@ -4,7 +4,7 @@ suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
   library(shinyhelper)
-  library(APPNAME)
+  library(zagrumes974)
 })
 
 
@@ -70,8 +70,6 @@ function(req) {
 
 
   body <- dashboardBody(
-    useShinyalert(),
-    
     tags$head(
       tags$link(rel = "shortcut icon", href = "favicon.png"),
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
@@ -81,7 +79,7 @@ function(req) {
 
       # Onglet Accueil ####
       
-      tabItem(tabName = "presentation", fluidRow(
+      tabItem(tabName = "accueil", fluidRow(
         div(includeMarkdown(sprintf("locale/accueil_%s.md", lang)), class = "markdown-tab")
       ))
 
@@ -107,5 +105,5 @@ function(req) {
 
 # PAGE --------------------------------------------------------------------
 
-  dashboardPage(header, sidebar, body, title = "APPNAME", skin = "green")
+  dashboardPage(header, sidebar, body, title = "zagrumes974", skin = "green")
 } # end of req

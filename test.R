@@ -1,12 +1,15 @@
 # deployment to shinyapps.io with rsconnect
 
 # SETUP
-# git remote set-url --add --push origin git@github.com:anna-doizy/ipsimcirsium.git
-# git remote set-url --add --push origin git@gitlab.com:doana-r/ipsimcirsium.git
+# create a new repo on gitlab and github
+# git remote add origin git@gitlab.com:cirad-apps/zagrumes974.git
+# git remote set-url --add --push origin git@github.com:anna-doizy/zagrumes974.git
+# git remote set-url --add --push origin git@gitlab.com:cirad-apps/zagrumes974.git
 # git remote -v
 # origin  git@gitlab.com:doana-r/ipsimcirsium.git (fetch)
 # origin  git@github.com:anna-doizy/ipsimcirsium.git (push)
 # origin  git@gitlab.com:doana-r/ipsimcirsium.git (push)
+# git push -u origin master/main
 
 # EACH TIME before deployment
 # update all packages
@@ -23,7 +26,7 @@
 
 
 
-library(APPNAME)
+library(zagrumes974)
 
 lang <- "fr"
 

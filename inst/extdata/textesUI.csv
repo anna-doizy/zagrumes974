@@ -1,38 +1,3 @@
 id,fr,en
-titre,IPSIM-<em>Cirsium</em>,IPSIM-<em>Cirsium</em>
+titre,Zagrumes974, Zagrumes974
 contact,Nous contacter,Contact us
-donnees_t1,I/ Infestation initiale,I/ Initial infestation
-donnees_t2,II/ Environnement au printemps,II/ Spring environment
-donnees_t3,III/ Pratiques culturales,III/ Cropping practices
-donnees_b11,Infestation initiale,Initial infestation
-donnees_b21,Température,Temperature
-donnees_b22,Pluviométrie,Rainfall
-donnees_b23,Tassement du sol,Soil compaction
-donnees_b31,Pratiques influençant la compétition,Practices influencing competition
-donnees_b32,Herbicides,Herbicides
-donnees_b33,Travail mécanique,Mechanical work
-donnees_validez,Validez,Validate
-confirm_title,Simulation effectuée avec succès !,Simulation completed successfully !
-confirm_text,Consultez l'onglet 'Résultats' pour obtenir le résultat de votre simulation.,Go to the 'Results' tab to see the results of your simulation.
-error_title,Vous ne passerez pas !,You shall not pass!
-error_text,Répondez à toutes les questions.,Answer all of the questions.
-results_boite1,Temporalité,Timeline
-results_boite2,Facteurs influençant l'infestation,Factors influencing infestation
-results_h4,Cliquez sur les ronds en gras pour détailler les facteurs d'influence.,Click on the bold circles for details on each influencing factor.
-results_deplier,Tout déplier/replier,Expand/Collapse
-results_version,Version noir et blanc,Black and white version
-global_title,Evolution du niveau d'infestation par les chardons,Evolution of the level of thistle infestation
-global_legend,Niveau de risque d'infestation en chardon,Risk level of thistle infestation
-global_y,Niveau d'infestation,Infestation level
-global_x,Année,Year
-global_moins,élevé,high
-global_zero,intermédiaire,intermediate
-global_zero_plus,faible,low
-global_plus,très faible ou nul,very low or null
-tree_root,Infestation finale,Final infestation
-tree_legend,Impact relatif des facteurs sur la présence de chardon,Relative impact on the presence of thistle
-tree_moins,très favorable,very favourable
-tree_zero_moins,favorable,favourable
-tree_zero,neutre,neutral
-tree_zero_plus,défavorable,unfavourable
-tree_plus,très défavorable,very unfavourable

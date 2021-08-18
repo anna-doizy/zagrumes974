@@ -7,5 +7,5 @@ textesUI <- read.csv("inst/extdata/textesUI.csv", encoding = "UTF-8")
 # encoding for getting rid of the R-CMD check "found non-ASCII strings" warning
 
 
-# usethis::use_data(, overwrite = TRUE)
+usethis::use_data(onglets, textesUI, overwrite = TRUE)
 

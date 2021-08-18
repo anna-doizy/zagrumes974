@@ -1,4 +1,4 @@
-#' Run APPNAME application
+#' Run Zagrumes974 application
 #'
 #' Warning: beware of launching the app in a web browser and not in the RStudio viewer
 #'
@@ -16,7 +16,7 @@ run_app <- function(lang="fr") {
   }
   
   shiny::runApp(
-    system.file("app", package = "APPNAME"), 
+    system.file("app", package = "zagrumes974"), 
     launch.browser = i8n_launch.browser
     )
 }
