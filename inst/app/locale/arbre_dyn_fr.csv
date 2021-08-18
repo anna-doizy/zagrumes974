@@ -1,0 +1,26 @@
+Niv1,Niv2,Niv3,Niv4,Niv5
+Infestation initiale,Densité initiale,NA,NA,NA
+Infestation initiale,Fréquence initiale,NA,NA,NA
+Risque d’infestation,Environnement au printemps,Météo,Température,en Mars
+Risque d’infestation,Environnement au printemps,Météo,Température,en Avril
+Risque d’infestation,Environnement au printemps,Météo,Température,en Mai
+Risque d’infestation,Environnement au printemps,Météo,Pluviométrie,en Mars
+Risque d’infestation,Environnement au printemps,Météo,Pluviométrie,en Avril
+Risque d’infestation,Environnement au printemps,Météo,Pluviométrie,en Mai
+Risque d’infestation,Environnement au printemps,Tassement du sol,NA,NA
+Risque d’infestation,Pratiques culturales,Compétition,Prairie,Type de prairie
+Risque d’infestation,Pratiques culturales,Compétition,Prairie,Fréquence d’entretien
+Risque d’infestation,Pratiques culturales,Compétition,Prairie,Durée de la rotation
+Risque d’infestation,Pratiques culturales,Compétition,Prairie,Temps de retour
+Risque d’infestation,Pratiques culturales,Compétition,Couvert végétal,Type de couvert
+Risque d’infestation,Pratiques culturales,Compétition,Couvert végétal,Arrêt du couvert
+Risque d’infestation,Pratiques culturales,Compétition,Compétitivité de la culture,Semis
+Risque d’infestation,Pratiques culturales,Compétition,Compétitivité de la culture,Densité de semis
+Risque d’infestation,Pratiques culturales,Herbicide,NA,NA
+Risque d’infestation,Pratiques culturales,Travail méchanique,Sur la culture en cours,Coupes sélectives
+Risque d’infestation,Pratiques culturales,Travail méchanique,Sur la culture en cours,Binages interrang
+Risque d’infestation,Pratiques culturales,Travail méchanique,Déchaumage,N-1
+Risque d’infestation,Pratiques culturales,Travail méchanique,Déchaumage,N-2
+Risque d’infestation,Pratiques culturales,Travail méchanique,Déchaumage,N-3
+Risque d’infestation,Pratiques culturales,Travail méchanique,Déchaumage,N-4
+Risque d’infestation,Pratiques culturales,Travail méchanique,Labour,NA
