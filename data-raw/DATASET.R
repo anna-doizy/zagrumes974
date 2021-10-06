@@ -2,10 +2,23 @@
 
 # Translations ------------------------------------------------------------
 
-onglets <- read.csv("inst/extdata/onglets.csv", encoding = "UTF-8")
-textesUI <- read.csv("inst/extdata/textesUI.csv", encoding = "UTF-8")
+onglets <- read.csv("data-raw/onglets.csv", encoding = "UTF-8")
+textesUI <- read.csv("data-raw/textesUI.csv", encoding = "UTF-8")
 # encoding for getting rid of the R-CMD check "found non-ASCII strings" warning
 
 
 usethis::use_data(onglets, textesUI, overwrite = TRUE)
+
+
+
+# Carte -------------------------------------------------------------------
+
+prelev <- readr::read_csv2("data-raw/data_agrumile.csv") %>% 
+  mutate(
+    Date = lubridate::dmy(Date),
+    Maladie = factor(Maladie)
+  )
+
+usethis::use_data(prelev, overwrite = TRUE)
+devtools::document() # modifier R/data.R
 

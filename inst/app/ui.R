@@ -4,6 +4,7 @@ suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
   library(shinyhelper)
+  library(leaflet)
   library(zagrumes974)
 })
 
@@ -84,7 +85,10 @@ function(req) {
       ))
 
       
-      
+      # Onglet le HLB à la RUN ####
+      , tabItem(tabName = "situation", fluidRow(
+        leafletOutput("situation_map")
+      ))
       
       
       

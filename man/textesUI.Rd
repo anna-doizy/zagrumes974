@@ -5,7 +5,12 @@
 \alias{textesUI}
 \title{Translation of the rest of the user interface}
 \format{
-data.frame 48x4
+data.frame with 3 columns and as many lines as texts to translate
+\describe{
+\item{id}{unique text identifier}
+\item{fr}{text in French}
+\item{en}{text in English}
+}
 }
 \usage{
 textesUI

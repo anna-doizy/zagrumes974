@@ -1,16 +1,40 @@
-**IPSIM-Cirsium** is a tool developped by INRA for professionals in agriculture to predict and manage the damage caused by thistle on crops in France.
+**A TRADUIRE**
 
-### User guide
+<img src="logo-zagrumes974.png" id="logo"> 
 
-1. Choose your language
-1. Go to **your situation** tab
-1. Tick what you want and validate
-1. Explore model results
-1. Go back to the questionnaire for testing new combinations...
+> **Zagrumes974** est l'application web du suivi épidémiologique des agrumes face au HLB à la Réunion.
 
-**NOT UPDATED YET**
 
-***
-> Your data is used to produce the result and is not retained.
+## Contexte et utilisation
+
+*quelque chose ici*
+
 
 ***
+
+[<img src="logo-cirad.jpg" class="logo-10"> ](https://www.cirad.fr/)
+[<img src="logo-anses.jpg" class="logo-10"> ](/)
+[<img src="logo-inrae.png" class="logo-10"> ](https://www.inrae.fr/)
+[<img src="logo-fdgdon.jpg" class="logo-10"> ](/)
+[<img src="logo-departement-reunion.jpg" class="logo-10"> ](/)
+[<img src="logo-region-reunion.png" class="logo-10"> ](/)
+[<img src="logo-ministere-agriculture.jpg" class="logo-10"> ](/)
+[<img src="logo-eu.jpg" class="logo-10"> ](/)
+
+*** 
+
+Dernière mise à jour : 2021-08-18 
+
+Logo ©[DoAna](https://doana-r.com)  
+Photographies ©    
+
+Le contenu écrit de cette application est disponible sous [licence CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) et le code sous [licence MIT](https://mit-license.org/) (© [DoAna](https://www.doana-r.com/) 2021).
+
+Ce site a été construit avec [R](https://www.r-project.org/) et [shiny](https://shiny.rstudio.com/).
+
+Code source : https://gitlab.com/doana-r/zagrumes974
+
+
+
+
+

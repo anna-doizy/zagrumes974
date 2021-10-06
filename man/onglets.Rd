@@ -5,7 +5,13 @@
 \alias{onglets}
 \title{Translation of tabs}
 \format{
-data.frame 7x4
+data.frame with 4 columns and as many lines as tabs
+\describe{
+\item{id}{shinydashboard::menuItem() tab name}
+\item{icon}{FontAwesome icon name}
+\item{fr}{tab text in French}
+\item{en}{tab text in English}
+}
 }
 \usage{
 onglets

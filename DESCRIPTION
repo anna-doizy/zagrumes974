@@ -14,12 +14,13 @@ Description: This package contains a shiny app about epidemiological
 License: MIT + file LICENSE
 Depends: R (>= 3.5.0)
 Imports:
+    leaflet,
     shiny,
     shinydashboard,
     shinyhelper
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-URL: 
-BugReports: 
+RoxygenNote: 7.1.2
+URL: https://gitlab.com/cirad-apps/zagrumes974
+BugReports: https://gitlab.com/cirad-apps/zagrumes974/issues

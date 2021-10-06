@@ -13,7 +13,7 @@
 
 # EACH TIME before deployment
 # update all packages
-# change "update date" in the ui
+# change "update date" in accueil fr ET en
 # check and install this package
 # check if parse("inst/app/server.R"), parse("inst/app/ui.R") work
 # commit & push
@@ -26,12 +26,94 @@
 
 
 
+# A FAIRE -----------------------------------------------------------------
+
+# - Ajouter une légende à la carte
+# - ajouter des moyens d'interagir avec la carte
+# - Ajouter les autres couches
+# - changer les icones des onglets
+# - changer les couleurs css
+# - mettre en ligne pour montrer à Isma
+
+
+
+
+
+
+
+
+
+
 library(zagrumes974)
 
 lang <- "fr"
 
 
 
+
+
+
+
+
+# Prélèvement HLB ---------------------------------------------------------
+
+library(tidyverse)
+library(leaflet)
+library(sf)
+
+prelev <- read_csv2("data-raw/data_agrumile.csv") %>% 
+  mutate(
+    Date = lubridate::dmy(Date),
+    Maladie = factor(Maladie)
+  )
+
+skimr::skim(prelev)
+
+table(prelev$Id)
+hist(prelev$Surface)
+hist(prelev$Altitude)
+ftable(Maladie ~ Type, data = prelev)
+
+ggplot(prelev) +
+  aes(x = Date, y = Altitude, color = Maladie) + 
+  naniar::geom_miss_point()
+
+
+communes <- read_sf("data-raw/COMMUNES_32740.shp")
+
+leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
+  addProviderTiles("Stamen.Terrain") %>%
+  setView(55.5, -21.15, zoom = 10) %>%
+  addCircleMarkers(
+    ~X, ~Y, data = prelev %>% filter(Maladie == 0),
+    color = "darkgreen",
+    fill = TRUE,
+    opacity = 0.5,
+    fillOpacity = 0.5,
+    radius = ~ Surface/1000
+  ) %>%
+  addCircleMarkers(
+    ~X, ~Y, data = prelev %>% filter(Maladie == 1),
+    # icon = list(iconUrl = "hex_icon.svg", iconSize = c(100,100)),
+    color = "red",
+    # popup = ~paste(
+    #   paste0("<img src = \"", htmlEscape(img_src), "\", style = \"max-width:200px;max-height:200px\">"),
+    #   htmlEscape(vernaculaire),
+    #   paste("<em>", htmlEscape(g_latin), htmlEscape(e_latin), "</em>"),
+    #   htmlEscape(date),
+    #   sep = "<br>"
+    # )
+    fill = TRUE,
+    opacity = 0.5,
+    fillOpacity = 0.5,
+    radius = ~ Surface/1000
+  )
+
+
+# communes_wgs84 <- st_transform(communes, "+init=epsg:4326")
+# leaflet(data = communes) %>% addPolygons()
+
+plot(communes)
 
 
 
