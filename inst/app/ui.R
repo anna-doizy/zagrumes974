@@ -17,7 +17,7 @@ function(req) {
   lang <- try(parseQueryString(req$QUERY_STRING)$lang)
 
   if (is.null(lang) || !(lang %in% c("fr", "en"))) {
-    lang <- "en"
+    lang <- "fr"
   }
 
 

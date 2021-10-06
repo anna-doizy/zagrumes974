@@ -18,7 +18,7 @@ server <- function(input, output, session) {
     lang <<- isolate(getQueryString()$lang)
 
     if (is.null(lang) || !(lang %in% c("fr", "en"))) {
-      lang <<- "en"
+      lang <<- "fr"
     }
 
   })
