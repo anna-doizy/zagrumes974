@@ -27,7 +27,7 @@ server <- function(input, output, session) {
   output$situation_map <- renderLeaflet({
     leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
       addProviderTiles("Stamen.Terrain") %>%
-      setView(55.5, -21.15, zoom = 11) %>%
+      setView(55.5, -21.12, zoom = 11) %>%
       addCircleMarkers(
         ~X, ~Y, data = prelev %>% filter(Maladie == 0),
         color = "darkgreen",
