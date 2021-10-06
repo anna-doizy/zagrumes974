@@ -4,6 +4,7 @@ suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
   library(shinyhelper)
+  library(dplyr)
   library(leaflet)
   library(zagrumes974)
 })
