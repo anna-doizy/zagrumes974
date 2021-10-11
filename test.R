@@ -30,11 +30,15 @@
 
 # - Ajouter une légende à la carte
 # - ajouter des moyens d'interagir avec la carte
-# - Ajouter les autres couches
-# - changer les couleurs css
-# - décaler un peu la carte vers le bas
+# - Ajouter la couche pluvio (pluvio annuelle médiane de 1986 à 2016)
 
-
+# - logo en haut à gauche : dessin / cliquable ?
+# - case taille parcelle à cocher pour changer la taille des cercles
+# - icone des parcelles pour suggérer un verger
+# - pour en savoir plus redirige vers le site plateforme-esv.fr/huanlongbing (attendre confirmation et changer icone)
+# - remerciement icone coeur ?
+# - demande de mail pour Henri en passant par Isma
+# - intégrer texte + photos (jeudi) + simulation (novembre)
 
 
 
