@@ -32,7 +32,7 @@
 # - ajouter des moyens d'interagir avec la carte
 # - Ajouter les autres couches
 # - changer les couleurs css
-# - pourquoi la langue par défaut est l'anglais en ligne ?
+# - décaler un peu la carte vers le bas
 
 
 
@@ -77,18 +77,20 @@ ggplot(prelev) +
   naniar::geom_miss_point()
 
 
-communes <- read_sf("data-raw/COMMUNES_32740.shp")
+communes <- read_sf("data-raw/communes.shp")
+pluvio <- read_sf("data-raw/pluvio.shp")
 
 leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
   addProviderTiles("Stamen.Terrain") %>%
   setView(55.5, -21.15, zoom = 10) %>%
+  addPolygons(data = communes, color = "#000", fillOpacity = 0, popup =  ~ COMMUNE, weight = 2) %>%
   addCircleMarkers(
     ~X, ~Y, data = prelev %>% filter(Maladie == 0),
     color = "darkgreen",
     fill = TRUE,
     opacity = 0.5,
-    fillOpacity = 0.5,
-    radius = ~ Surface/1000
+    fillOpacity = 0.5
+    # radius = ~ Surface/1000
   ) %>%
   addCircleMarkers(
     ~X, ~Y, data = prelev %>% filter(Maladie == 1),
@@ -103,13 +105,14 @@ leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzo
     # )
     fill = TRUE,
     opacity = 0.5,
-    fillOpacity = 0.5,
-    radius = ~ Surface/1000
-  )
+    fillOpacity = 0.5
+    # radius = ~ Surface/1000
+  ) %>% 
+  # addPolylines(data = pluvio, color = ~ r_median) # rasteriser ?
 
 
 # communes_wgs84 <- st_transform(communes, "+init=epsg:4326")
-# leaflet(data = communes) %>% addPolygons()
+leaflet(data = communes) %>% addPolygons()
 
 plot(communes)
 

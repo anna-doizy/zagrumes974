@@ -28,21 +28,22 @@ server <- function(input, output, session) {
     leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
       addProviderTiles("Stamen.Terrain") %>%
       setView(55.5, -21.12, zoom = 11) %>%
+      addPolygons(data = communes, color = "#000", fillOpacity = 0, popup =  ~ COMMUNE, weight = 2) %>%
       addCircleMarkers(
         ~X, ~Y, data = prelev %>% filter(Maladie == 0),
         color = "darkgreen",
         fill = TRUE,
         opacity = 0.5,
-        fillOpacity = 0.5,
-        radius = ~ Surface/1000
+        fillOpacity = 0.5
+        # radius = ~ Surface/1000
       ) %>%
       addCircleMarkers(
         ~X, ~Y, data = prelev %>% filter(Maladie == 1),
         color = "red",
         fill = TRUE,
         opacity = 0.5,
-        fillOpacity = 0.5,
-        radius = ~ Surface/1000
+        fillOpacity = 0.5
+        # radius = ~ Surface/1000
       )
   })
   

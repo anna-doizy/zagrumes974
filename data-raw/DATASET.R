@@ -13,12 +13,17 @@ usethis::use_data(onglets, textesUI, overwrite = TRUE)
 
 # Carte -------------------------------------------------------------------
 
+library(dplyr)
+library(sf)
+
 prelev <- readr::read_csv2("data-raw/data_agrumile.csv") %>% 
   mutate(
     Date = lubridate::dmy(Date),
     Maladie = factor(Maladie)
   )
 
-usethis::use_data(prelev, overwrite = TRUE)
+communes <- read_sf("data-raw/communes.shp")
+
+usethis::use_data(prelev, communes, overwrite = TRUE)
 devtools::document() # modifier R/data.R
 

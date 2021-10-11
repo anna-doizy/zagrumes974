@@ -33,3 +33,11 @@
 #' }
 "prelev"
 
+
+#' polygon simple feature collection containing the municipalities of Reunion island
+#'
+#' @format sf with 24 municipalities and 1 field
+#' \describe{
+#'   \item{COMMUNE}{Municipality name}
+#' }
+"communes"

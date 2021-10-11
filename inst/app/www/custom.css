@@ -10,7 +10,7 @@ body {
 
 .skin-green .main-header .logo {
   background-color: #16771f;
-  color: #ffff9f;
+  color: #fff5ec;
 }
 
 .skin-green .main-header .logo:hover {
@@ -18,12 +18,12 @@ body {
 }
 
 .skin-green .main-header .navbar .sidebar-toggle {
-  color: #ffff9f;
+  color: #fff5ec;
 }
 
 .skin-green .main-header .navbar .sidebar-toggle:hover {
   background-color: #eb8200;
-  color: #ffff9f;
+  color: #fff5ec;
 }
 
 .box.box-solid.box-success > .box-header {
@@ -36,7 +36,7 @@ body {
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li > a {
-    color: #ffff9f;
+    color: #fff5ec;
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li:hover > a {
@@ -53,7 +53,11 @@ a {
 }
 
 .content-wrapper {
-  background-color: #ffff9f;
+  background-color: #fff5ec;
+}
+
+blockquote {
+  border-left: 5px solid #16771f;
 }
 
 /* fixed header and sidebar */

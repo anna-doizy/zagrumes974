@@ -23,7 +23,7 @@ function(req) {
 
   # TITLE -------------------------------------------------------------------
 
-  header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"]))
+  header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
 
 
   # SIDEBAR -----------------------------------------------------------------
@@ -56,7 +56,7 @@ function(req) {
       }),
       menuItem(
         text = strong(textesUI[[lang]][textesUI$id == "contact"]),
-        href = "mailto:ipsimcirsium@inrae.fr", # CHANGER
+        href = "mailto:zagrumes974@cirad.fr",
         icon = icon("at")
       )
     )
