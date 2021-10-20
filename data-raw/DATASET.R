@@ -8,7 +8,7 @@ textesUI <- read.csv("data-raw/textesUI.csv", encoding = "UTF-8")
 
 
 usethis::use_data(onglets, textesUI, overwrite = TRUE)
-
+devtools::document()
 
 
 # Carte -------------------------------------------------------------------
