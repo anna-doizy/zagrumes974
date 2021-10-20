@@ -23,8 +23,8 @@ function(req) {
 
   # TITLE -------------------------------------------------------------------
 
-  header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
-
+  # header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
+  header <- dashboardHeader(title = a(href = paste0("/?lang=", lang), img(src="title-zagrumes974.png", width = 190)))
 
   # SIDEBAR -----------------------------------------------------------------
 
@@ -53,12 +53,12 @@ function(req) {
           tabName = onglets$id[tab],
           icon = icon(onglets$icon[tab])
         )
-      }),
-      menuItem(
-        text = strong(textesUI[[lang]][textesUI$id == "contact"]),
-        href = "mailto:zagrumes974@cirad.fr",
-        icon = icon("at")
-      )
+      })#,
+      # menuItem(
+      #   text = strong(textesUI[[lang]][textesUI$id == "contact"]),
+      #   href = "mailto:zagrumes974@cirad.fr",
+      #   icon = icon("at")
+      # )
     )
   )
 
