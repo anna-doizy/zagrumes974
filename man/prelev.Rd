@@ -5,13 +5,12 @@
 \alias{prelev}
 \title{Raw data of the presence of the disease}
 \format{
-data.frame 782x8
+data.frame 267x7
 \describe{
 \item{Id}{Plot identifier}
 \item{X, Y}{WGS84 coordinates of the plot barycentre}
 \item{Surface}{Area of the plot}
 \item{Altitude}{Elevation of the plot}
-\item{Type}{Official or mixt origin of data}
 \item{Maladie}{Presence (1) or absence (0) of the disease}
 \item{Date}{Date of the observation}
 }

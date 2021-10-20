@@ -17,13 +17,16 @@ library(dplyr)
 library(sf)
 
 prelev <- readr::read_csv2("data-raw/data_agrumile.csv") %>% 
+  filter(!is.na(Date)) %>% 
+  select(-Type) %>% 
   mutate(
     Date = lubridate::dmy(Date),
     Maladie = factor(Maladie)
   )
 
 communes <- read_sf("data-raw/communes.shp")
+pluvio <- read_sf("data-raw/pluvio.shp")
 
-usethis::use_data(prelev, communes, overwrite = TRUE)
+usethis::use_data(prelev, communes, pluvio, overwrite = TRUE)
 devtools::document() # modifier R/data.R
 
