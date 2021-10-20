@@ -1,28 +1,3 @@
-# deployment to shinyapps.io with rsconnect
-
-# SETUP
-# create a new repo on gitlab and github
-# git remote add origin git@gitlab.com:cirad-apps/zagrumes974.git
-# git remote set-url --add --push origin git@github.com:anna-doizy/zagrumes974.git
-# git remote set-url --add --push origin git@gitlab.com:cirad-apps/zagrumes974.git
-# git remote -v
-# origin  git@gitlab.com:doana-r/zagrumes974.git (fetch)
-# origin  git@github.com:anna-doizy/zagrumes974.git (push)
-# origin  git@gitlab.com:doana-r/zagrumes974.git (push)
-# git push -u origin master/main
-
-# EACH TIME before deployment
-# update all packages
-# change "update date" in accueil fr ET en
-# check and install this package
-# check if parse("inst/app/server.R"), parse("inst/app/ui.R") work
-# commit & push
-# restart R session
-# remotes::install_github("anna-doizy/zagrumes974")
-# publish the app
-
-# nécessaire car comme l'application charge le package pour démarrer (récupère le jeu suivi), il a besoin d'être installé proprement dans le serveur distant. Pour l'instant RStudio (shinyapps) ne permet de faire cela qu'avec des packages classiques (CRAN) ou github, mais pas gitlab...
-
 
 
 
@@ -30,18 +5,19 @@
 
 # - Ajouter une légende à la carte
 # - ajouter des moyens d'interagir avec la carte
-# - Ajouter la couche pluvio (pluvio annuelle médiane de 1986 à 2016)
-
-# - logo en haut à gauche : dessin / cliquable ?
 # - case taille parcelle à cocher pour changer la taille des cercles
-# - icone des parcelles pour suggérer un verger
-# - pour en savoir plus redirige vers le site plateforme-esv.fr/huanlongbing (attendre confirmation et changer icone)
-# - remerciement icone coeur ?
 # - demande de mail pour Henri en passant par Isma
-# - intégrer texte + photos (jeudi) + simulation (novembre)
+# - intégrer les simulation (novembre)
+# - Ajouter les graphiques,type de ce que Nathan a fait
+# - Il me faut la source des images
 
-
-
+# - Ajouter la couche pluvio (pluvio annuelle médiane de 1986 à 2016) OK
+# - logo en haut à gauche : dessin / cliquable ? OK
+# - icone des parcelles pour suggérer un verger OK
+# - pour en savoir plus redirige vers le site plateforme-esv.fr/huanlongbing (attendre confirmation et changer icone) OK
+# - remerciement icone coeur ? OK
+# - intégrer texte + photos (jeudi) OK
+# - héberger les images ailleurs ?
 
 
 
@@ -52,54 +28,72 @@ lang <- "fr"
 
 
 
-
-
-
-
-
 # Prélèvement HLB ---------------------------------------------------------
 
 library(tidyverse)
 library(leaflet)
 library(sf)
 
-prelev <- read_csv2("data-raw/data_agrumile.csv") %>% 
-  mutate(
-    Date = lubridate::dmy(Date),
-    Maladie = factor(Maladie)
-  )
+
 
 skimr::skim(prelev)
 
 table(prelev$Id)
 hist(prelev$Surface)
 hist(prelev$Altitude)
-ftable(Maladie ~ Type, data = prelev)
 
 ggplot(prelev) +
   aes(x = Date, y = Altitude, color = Maladie) + 
-  naniar::geom_miss_point()
+  geom_point()
 
 
-communes <- read_sf("data-raw/communes.shp")
-pluvio <- read_sf("data-raw/pluvio.shp")
+
+# nouveau prelev ? 
+# nouvelle communes ?
+prelev_comm <- prelev %>% 
+  st_as_sf(coords=c('X', 'Y'), crs = st_crs(communes)) %>% 
+  st_intersection(
+    communes %>% 
+      st_set_precision(1e6) %>% 
+      st_make_valid() # probleme au PORT (st_is_valid)
+  )
+
+# ggplot(prelev_comm) +
+#   aes(y = COMMUNE, fill = Maladie) +
+#   geom_bar()
+
+library(echarts4r)
+
+# Faut-il pondérer par la surface ? Comment la prendre en compte ?
+prelev_comm %>% # ici filter avec les input DATE & ALTITUDE
+  as_tibble() %>% # facultatif
+  group_by(COMMUNE) %>%
+  summarise(
+    Sain = sum(Maladie == 0),
+    Malade = sum(Maladie == 1) # calcul du nb de parcelles saine et malades par commune
+  ) %>% 
+  e_chart(COMMUNE) %>% 
+  e_bar(Sain, stack = "maladie") %>% 
+  e_bar(Malade, stack = "maladie") %>%
+  e_tooltip(trigger = "axis") %>% 
+  e_flip_coords() %>% 
+  e_theme_custom('{"color":["#16771f","#eb8200"]}')
+
+
+
 
 leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
   addProviderTiles("Stamen.Terrain") %>%
   setView(55.5, -21.15, zoom = 10) %>%
   addPolygons(data = communes, color = "#000", fillOpacity = 0, popup =  ~ COMMUNE, weight = 2) %>%
-  addCircleMarkers(
+  addMarkers(
     ~X, ~Y, data = prelev %>% filter(Maladie == 0),
-    color = "darkgreen",
-    fill = TRUE,
-    opacity = 0.5,
-    fillOpacity = 0.5
+    icon = list(iconUrl = "inst/app/www/orchard-healthy.svg", iconSize = c(50,50)),
     # radius = ~ Surface/1000
   ) %>%
-  addCircleMarkers(
+  addMarkers(
     ~X, ~Y, data = prelev %>% filter(Maladie == 1),
-    # icon = list(iconUrl = "hex_icon.svg", iconSize = c(100,100)),
-    color = "red",
+    icon = list(iconUrl = "inst/app/www/orchard-unhealthy.svg", iconSize = c(50,50)),
     # popup = ~paste(
     #   paste0("<img src = \"", htmlEscape(img_src), "\", style = \"max-width:200px;max-height:200px\">"),
     #   htmlEscape(vernaculaire),
@@ -107,22 +101,25 @@ leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzo
     #   htmlEscape(date),
     #   sep = "<br>"
     # )
-    fill = TRUE,
-    opacity = 0.5,
-    fillOpacity = 0.5
+
     # radius = ~ Surface/1000
-  ) %>% 
+  )
   # addPolylines(data = pluvio, color = ~ r_median) # rasteriser ?
 
 
 # communes_wgs84 <- st_transform(communes, "+init=epsg:4326")
 leaflet(data = communes) %>% addPolygons()
 
-plot(communes)
 
 
+leaflet(data = pluvio) %>% addPolylines(
+  # stroke = TRUE, 
+  color = ~ colorNumeric("Blues", r_median)(r_median),
+  fillColor = "transparent",
+  noClip = TRUE
+)
 
-
+hist(pluvio$r_median, breaks = 40)
 
 
 

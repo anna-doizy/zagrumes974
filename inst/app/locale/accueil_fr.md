@@ -69,7 +69,7 @@ Depuis 2015, de nouveaux cas de HLB ont été observés sur l’île. Les parasi
 
 *** 
 
-Dernière mise à jour : 2021-10-11 
+Dernière mise à jour : 2021-10-20 
 
 Logo ©[DoAna](https://doana-r.com)  
 Photographies ©    
