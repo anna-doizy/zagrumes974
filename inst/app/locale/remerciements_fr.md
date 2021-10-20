@@ -1,4 +1,0 @@
-## Remerciements
-
-<br>
-

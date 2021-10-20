@@ -1,13 +1,9 @@
-**A TRADUIRE**
-
 <img src="logo-zagrumes974.png" id="logo"> 
 
 > **Zagrumes974** est l'application web du suivi épidémiologique des agrumes face au HLB à la Réunion.
 
 
-## Contexte et utilisation
-
-*quelque chose ici*
+**TRADUCTION A VENIR**
 
 
 ***

@@ -1,16 +1,37 @@
+## Nous contacter
+
+Si vous avez des suggestions des remarques ou autres dierses question, n'hésitez pas à nous contacter à [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr).
+
+<br>
+
 ## Ressources pour aller plus loin
 
-### Vulgarisation 
+La [Plateforme d’Épidémiosurveillance en Santé Végétale](https://plateforme-esv.fr/expertises/surveillance/huanglongbing) contient un descriptif plus détaillé de la maladie et les actualités du HLB.
+
+La [FDGDON, Clinique du Végétal](http://www.fdgdon974.fr) située à la Réunion propose des accompagnements personnalisés pour mettre en oeuvre des stratégies de protection intégrées innovantes.
+
+La [DAAF de la Réunion](https://daaf.reunion.agriculture.gouv.fr/) **POURQUOI ?**
+
+<br>
+
+## Remerciements
 
 
+La **chasse au HLB** a été réalisée par XXX.
+
+Merci aux partenaires XXX pour ...
+
+La **conception, la création et la réalisation de l’interface web** ont été coordonnées par Anna Doizy ([DoAna - Statistiques Réunion](https://doana-r.com)).
+
+L'**hébergement et la maintenance** de l'application sont assurées par XXX et Anna Doizy.
+
+La **traduction en anglais** a été assurée par Anna Doizy et corrigée par XXX.
+
+Merci aux bêta-testeurs de l'application : XXX.
+
+<br>
+
+> *Que toutes les contributrices et tous les contributeurs soient ici remercié(e)s !* 
 
 
-### Sites institutionnels
-
-
-
-
-### Le HLB
-
-*publi scientifiques ici*
 
