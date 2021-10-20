@@ -9,21 +9,21 @@ body {
 }
 
 .skin-green .main-header .logo {
-  background-color: #16771f;
-  color: #fff5ec;
+  background-color: #ffffff;
+  color: #ffffff;
 }
 
 .skin-green .main-header .logo:hover {
-  background-color: #16771f;
+  background-color: #ffffff;
 }
 
 .skin-green .main-header .navbar .sidebar-toggle {
-  color: #fff5ec;
+  color: #ffffff;
 }
 
 .skin-green .main-header .navbar .sidebar-toggle:hover {
   background-color: #eb8200;
-  color: #fff5ec;
+  color: #ffffff;
 }
 
 .box.box-solid.box-success > .box-header {
@@ -36,7 +36,7 @@ body {
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li > a {
-    color: #fff5ec;
+    color: #ffffff;
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li:hover > a {
@@ -53,7 +53,7 @@ a {
 }
 
 .content-wrapper {
-  background-color: #fff5ec;
+  background-color: #ffffff;
 }
 
 blockquote {
@@ -92,13 +92,25 @@ hr {
   padding-right: 10vw;
 }
 
+
 .responsive-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: inline-block;
+  margin: 1em;
   height: 50vw; 
   max-height: 400px;
 }
+
+.responsive-img-600 { 
+  display: inline-block;
+  margin: 1em;
+  max-height: 90vh;
+  height: 600px;
+}
+
+.center {
+  text-align: center;
+}
+
 
 #logo {
   display: block;
@@ -115,11 +127,15 @@ hr {
   margin: 5px;
 }
 
-.center{
-  text-align: center;
-}
+/* dans les helper 
+.helper-img {
+  width: 80%;
+  max-width: 400px;
+  margin: 0.5em;
+}*/
 
 
+/* carte HLB à la Réunion */
 #situation_map {
   height: 100vh !important;
 }
