@@ -5,7 +5,10 @@ suppressPackageStartupMessages({
   library(shinydashboard)
   library(shinyhelper)
   library(dplyr)
+  library(tidyr)
+  library(sf)
   library(leaflet)
+  library(echarts4r)
   library(zagrumes974)
 })
 
@@ -24,7 +27,9 @@ function(req) {
   # TITLE -------------------------------------------------------------------
 
   # header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
-  header <- dashboardHeader(title = a(href = paste0("/?lang=", lang), img(src="title-zagrumes974.png", width = 190)))
+  header <- dashboardHeader(title = a(href = paste0("./?lang=", lang), img(src="title-zagrumes974.png", width = 190)))
+  
+  # A VOIR pour le lien quand cela ira dans un autre serveur
 
   # SIDEBAR -----------------------------------------------------------------
 
@@ -87,8 +92,96 @@ function(req) {
 
       
       # Onglet le HLB à la RUN ####
+      # , tabItem(tabName = "situation", fluidRow(
+      #   leafletOutput("situation_map"),
+      #   
+      #   absolutePanel( # peut-être faire deux boîtes pour le responsiveness ???
+      #     id = "controls", class = "panel panel-default", fixed = FALSE,
+      #     draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
+      #     width = 400, height = "auto",
+      #     
+      #     p(),
+      #     
+      #     ## time ####
+      #     sliderInput(
+      #       "periode",
+      #       label = strong("Choix de la période"), # textui
+      #       min = min(prelev$Date),
+      #       max = max(prelev$Date),
+      #       value = range(prelev$Date),
+      #       timeFormat = "%m/%Y", # lang "%Y-%m"
+      #       ticks = FALSE
+      #     ),
+      #     
+      #     # elevation ####
+      #     sliderInput(
+      #       "altitude",
+      #       label = strong("Choix de l'altitude"), # textui
+      #       min = 0,
+      #       max = 3000,
+      #       value = c(0, 3000),
+      #       ticks = FALSE
+      #     ),
+      #     
+      #     ## temporal evolution ####
+      #     p(strong("Surface échantillonnée par commune")), # textui
+      #     echarts4rOutput("surf_commune", height = "auto"),
+      #     
+      #     br(),
+      #     ## pluviométrie ####
+      #     p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
+      #     checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
+      #   ), # end of absolute panel
+      # 
+      # ))
+      
       , tabItem(tabName = "situation", fluidRow(
-        leafletOutput("situation_map")
+        column(
+          width = 8,box(
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
+          leafletOutput("situation_map"))
+        ),
+        
+        column(
+          width = 4,
+          box(
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
+
+            ## time ####
+            sliderInput(
+              "periode",
+              label = strong("Choix de la période"), # textui
+              min = min(prelev$Date),
+              max = max(prelev$Date),
+              value = range(prelev$Date),
+              timeFormat = "%m/%Y", # lang "%Y-%m"
+              width = "80%",
+              ticks = FALSE
+            ),
+            
+            # elevation ####
+            sliderInput(
+              "altitude",
+              label = strong("Choix de l'altitude"), # textui
+              min = 0,
+              max = 3000,
+              value = c(0, 3000),
+              width = "80%",
+              ticks = FALSE
+            ),
+            
+            hr(),
+            
+            ## temporal evolution ####
+            p(strong("Surface échantillonnée par commune")), # textui
+            echarts4rOutput("surf_commune", height = "300px"),
+            
+            # br(),
+            # ## pluviométrie ####
+            # p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
+            # checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
+          ) # end of absolute panel
+        )
       ))
       
       

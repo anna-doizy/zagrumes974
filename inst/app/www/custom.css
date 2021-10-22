@@ -26,22 +26,27 @@ body {
   color: #ffffff;
 }
 
-.box.box-solid.box-success > .box-header {
+/*.box.box-solid.box-success > .box-header {
   background: #16771f;
   background-color: #16771f;
 }
 
 .box.box-solid.box-success {
-    border: 1px solid #16771f;
+  border: 1px solid #16771f;
+}*/
+
+.box.box-success {
+  border: 0;
+  box-shadow: none;
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li > a {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li:hover > a {
-    color: #eb8200;
-    border-left-color: #16771f;
+  color: #eb8200;
+  border-left-color: #16771f;
 }
 
 a:focus, a:hover {
@@ -72,7 +77,7 @@ blockquote {
 }
 
 .content {
-  /*margin-top: 38px;  PB responsive, résoudre avec padding ? */
+  margin-top: 50px; /* PB responsive, résoudre avec padding ? */
 }
 
 /* hr color */
@@ -85,7 +90,7 @@ hr {
 .markdown-tab {
   padding-left: 2em;
   padding-bottom: 5vw;
-  padding-top: 50px;
+  padding-top: 0;
 }
 
 .markdown-tab p {
@@ -137,8 +142,17 @@ hr {
 
 /* carte HLB à la Réunion */
 #situation_map {
-  height: 100vh !important;
+  height: 80vh !important;
 }
 
-
+/* Absolute panel called controls
+#controls {
+  background-color: #6a6a6a;
+  border-color: #fff;
+  padding: 0 20px 20px 20px;
+  cursor: move;
+  opacity: 0.85;
+  zoom: 0.9;
+  color: #fff;
+} */
 

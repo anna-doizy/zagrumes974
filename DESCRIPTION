@@ -19,7 +19,9 @@ Imports:
     leaflet,
     shiny,
     shinydashboard,
-    shinyhelper
+    shinyhelper,
+    echarts4r,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
