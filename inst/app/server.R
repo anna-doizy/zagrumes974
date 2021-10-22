@@ -23,32 +23,97 @@ server <- function(input, output, session) {
 
   })
   
+  prelev_sel <- reactive({
+    prelev %>% 
+      filter(
+        between(Date, input$periode[1], input$periode[2]),
+        between(Altitude, input$altitude[1], input$altitude[2])
+      )
+  })  
+  
   
   output$situation_map <- renderLeaflet({
-    leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzoom anonymises data
+    leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
       addProviderTiles("Stamen.Terrain") %>%
-      setView(55.5, -21.12, zoom = 11) %>%
-      addPolygons(data = communes, color = "#000", fillOpacity = 0, popup =  ~ COMMUNE, weight = 2) %>%
-      addCircleMarkers(
-        ~X, ~Y, data = prelev %>% filter(Maladie == 0),
-        color = "darkgreen",
-        fill = TRUE,
-        opacity = 0.5,
-        fillOpacity = 0.5
-        # radius = ~ Surface/1000
+      setView(55.5, -21.12, zoom = 10) %>%
+      addPolygons(
+        data = communes, 
+        color = "#000", 
+        fillOpacity = 0, 
+        popup =  ~ COMMUNE, 
+        weight = 2
+      ) %>% 
+      addMarkers(
+        ~X, ~Y, data = prelev %>% filter(Maladie == "Sain"), 
+        popup = "Présence de HLB non observée dans ce verger", # textui
+        icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
       ) %>%
-      addCircleMarkers(
-        ~X, ~Y, data = prelev %>% filter(Maladie == 1),
-        color = "red",
-        fill = TRUE,
-        opacity = 0.5,
-        fillOpacity = 0.5
-        # radius = ~ Surface/1000
+      addMarkers(
+        ~X, ~Y, data = prelev %>% filter(Maladie == "Malade"), 
+        popup = "Présence de HLB observée dans ce verger", # textui
+        icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
       )
   })
   
+
+  observe({
+    
+    # pourquoi ça ne fonctionne pas ?
+    
+    # ifelse(input$pluvio_check,
+    #   
+    #   leafletProxy("situation_map")  %>%
+    #     addPolylines(
+    #       data = pluvio,
+    #       color = ~ colorNumeric("Blues", r_median)(r_median),
+    #       # fillColor = "transparent",
+    #       noClip = TRUE,
+    #       layerId = "pluvio_layer"
+    #     ),
+    #   leafletProxy("situation_map") %>%
+    #     removeShape("pluvio_layer")
+    # )
+
+
+    leafletProxy("situation_map") %>%
+      clearMarkers() %>% 
+      addMarkers(
+        ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Sain"), 
+        popup = "Présence de HLB non observée dans ce verger", # textui
+        icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
+      ) %>%
+      addMarkers(
+        ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Malade"), 
+        popup = "Présence de HLB observée dans ce verger", # textui
+        icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
+      )
+
+  })
   
   
+  output$surf_commune <- renderEcharts4r({
+    if(nrow(prelev_sel()) > 0) # in the case where nothing is selected: don't plot the graph
+    
+      prelev_sel() %>%
+        group_by(COMMUNE, Maladie) %>%
+        summarise(Surface = sum(Surface)) %>%
+        pivot_wider(names_from = Maladie, values_from = Surface, values_fill = 0) %>%
+        ungroup() %>%
+        arrange(COMMUNE) %>% # par taille totale de la commune ou de la SAU
+        e_chart(COMMUNE) %>%
+        e_bar(Malade, stack = "maladie") %>%
+        e_bar(Sain, stack = "maladie") %>%
+        e_tooltip(trigger = "axis") %>%
+        e_grid(left = "20%") %>% 
+        e_y_axis(formatter = e_axis_formatter(locale = lang)) %>%
+        e_tooltip(trigger = "axis", formatter = e_tooltip_pointer_formatter(locale = lang, digits = 0)) %>%
+        e_theme_custom('{"color":["#eb8200","#16771f"]}') %>%
+        suppressMessages() %>% suppressWarnings()
+    # y ajouter la surface agricole totale par commune
+    # theme ?
+    # ordre des communes
+    # prevenir de quand on sélectionne un jeu de 0 lignes ?
+  })
 
  
   
