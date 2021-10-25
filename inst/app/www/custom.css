@@ -65,6 +65,11 @@ blockquote {
   border-left: 5px solid #16771f;
 }
 
+/* hr color */
+hr {
+  border-top: 1px solid #16771f;
+}
+
 /* fixed header and sidebar */
 .main-header {
   position: fixed;
@@ -80,10 +85,7 @@ blockquote {
   margin-top: 50px; /* PB responsive, résoudre avec padding ? */
 }
 
-/* hr color */
-hr {
-  border-top: 1px solid #1e6a5b;
-}
+
 
 
 /* markdown tabs and their images */
