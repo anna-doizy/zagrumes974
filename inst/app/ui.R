@@ -28,8 +28,6 @@ function(req) {
 
   # header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
   header <- dashboardHeader(title = a(href = paste0("./?lang=", lang), img(src="title-zagrumes974.png", width = 190)))
-  
-  # A VOIR pour le lien quand cela ira dans un autre serveur
 
   # SIDEBAR -----------------------------------------------------------------
 
@@ -139,7 +137,9 @@ function(req) {
         column(
           width = 8,box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
-          leafletOutput("situation_map"))
+            leafletOutput("situation_map")),
+            icon("question-circle"),
+            "Les coordonnées des parcelles ont été légèrement modifiées pour préserver l'anonymat des agriculteurs." # textui
         ),
         
         column(
