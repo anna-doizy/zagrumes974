@@ -3,15 +3,16 @@
 
 # A FAIRE -----------------------------------------------------------------
 
-# - Ajouter la couche pluvio (pluvio annuelle médiane de 1986 à 2016)
-# - case taille parcelle à cocher pour changer la taille des cercles ?
-# - quelle est l'unité de surface ?
-# - SAU par commune ou surface totale ? pour améliorer le graphique
+# - Supprimer toute trace de la couche pluvio
+# - surface totale d'agrume par commune pour améliorer le graphique
 # - demande de mail pour Henri en passant par Isma
+# - intégrer les cartes interpolation
 # - intégrer les simulations (novembre)
-# - Il me faut la source des images
-# - héberger les images ailleurs ?
-# - Erreur connue : s'il n'y a pas de Sain ou de Malade dans la table, le graphe est cassé
+# - héberger les images ailleurs ? leur donner un titre ?
+# - Erreur connue : s'il n'y a pas de Sain ou de Malade dans la table, le graphe est cassé NA
+
+
+# FAIT 
 
 # - Ajouter une légende à la carte OK ?
 # - Faire en sorte que les points s'affichent directement sur la carte OK
@@ -23,10 +24,14 @@
 # - pour en savoir plus redirige vers le site plateforme-esv.fr/huanlongbing (attendre confirmation et changer icone) OK
 # - remerciement icone coeur ? OK
 # - intégrer texte + photos (jeudi) OK
+# - case taille parcelle à cocher pour changer la taille des cercles ? NON
+# - quelle est l'unité de surface ? OK
+# - Il me faut la source des images OK
+# - unité de surface m² à transformer en ha : 1 ha = 10000 m² OK
 
 
 
-
+# ----
 
 library(zagrumes974)
 
