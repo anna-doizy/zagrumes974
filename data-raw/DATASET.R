@@ -20,7 +20,7 @@ communes <- read_sf("data-raw/communes.shp") %>%
   st_set_precision(1e6) %>% 
   st_make_valid() # probleme au PORT (st_is_valid)
 
-pluvio <- read_sf("data-raw/pluvio.shp")
+pluvio <- read_sf("data-raw/pluvio.shp") # A CHANGER
 
 
 set.seed(562)
@@ -34,8 +34,16 @@ prelev <- readr::read_csv2("data-raw/data_agrumile.csv") %>%
   mutate(
     Date = lubridate::dmy(Date),
     Maladie = factor(Maladie, labels = c("Sain", "Malade")),
-    X = X + rnorm(n(), sd = 0.01),
-    Y = Y + rnorm(n(), sd = 0.01)
+    X = X + rnorm(n(), sd = 0.01), # anonymisation
+    Y = Y + rnorm(n(), sd = 0.01),
+    Surface = Surface / 10000 # conversion m² -> ha
+  )
+
+
+surface_agrume <- readr::read_csv2("data-raw/somme surface commune.csv") %>% 
+  rename(COMMUNE = "Commune", Surface_tot = "Surface tot agrumes en m2") %>% 
+  mutate(
+    Surface_tot = Surface_tot / 10000, # conversion m² -> ha
   )
 
 
