@@ -1,6 +1,6 @@
 ## Nous contacter
 
-Si vous avez des suggestions des remarques ou autres dierses question, n'hésitez pas à nous contacter à [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr).
+Si vous avez des suggestions, des remarques ou autres diverses question, n'hésitez pas à nous contacter à [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr).
 
 <br>
 
@@ -8,9 +8,9 @@ Si vous avez des suggestions des remarques ou autres dierses question, n'hésite
 
 La [Plateforme d’Épidémiosurveillance en Santé Végétale](https://plateforme-esv.fr/expertises/surveillance/huanglongbing) contient un descriptif plus détaillé de la maladie et les actualités du HLB.
 
-La [FDGDON, Clinique du Végétal](http://www.fdgdon974.fr) située à la Réunion propose des accompagnements personnalisés pour mettre en oeuvre des stratégies de protection intégrées innovantes.
+La [DAAF de la Réunion](https://daaf.reunion.agriculture.gouv.fr/) organise la surveillance officielle du HLB à la Réunion.
 
-La [DAAF de la Réunion](https://daaf.reunion.agriculture.gouv.fr/) **POURQUOI ?**
+La [FDGDON, Clinique du Végétal](http://www.fdgdon974.fr) située à la Réunion propose des accompagnements personnalisés pour mettre en oeuvre des stratégies de protection intégrées innovantes. Elle réalise la surveillance officielle.
 
 <br>
 

@@ -7,7 +7,21 @@ Elle s’adresse principalement aux acteurs de la surveillance mais est accessib
 
 ## Mode d'emploi
 
-*quelque chose ici*
+Cette page d’**Accueil** introduit la biologie de la maladie HLB.
+
+
+L’onglet **Le HLB à la Réunion** vous montre une carte interactive de la présence du HLB à la
+Réunion par période, altitude et commune.
+
+
+La page **Modéliser une épidémie** propose différents jeux de paramètres afin de simuler la
+propagation d’une maladie similaire au HLB dans un parcellaire fictif à des fins pédagogiques.
+
+
+Dans **A propos**, vous trouverez les liens pour approfondir votre recherche ainsi que les différents
+acteurs ayant participé à ces travaux.
+
+
 
 ## Contexte
 
@@ -15,6 +29,8 @@ Le **greening**, ou **Huanglongbing** (HLB) ou encore maladie de la pousse jaune
 
 <p class="center">
   <img src="carte.jpg" class="responsive-img">
+  <br>
+  <em> Source : Ganry et al, 2009. Le Huang Long Bing (Greening) des agrumes, une très lourde menace pour le Bassin Méditerranéen. In : Conférence "Fruits et légumes, alimentation et santé pour le Sud", 24 février 2009, Paris, France.</em> 
 </p>
 
 Cette maladie est caractérisée par l’obstruction des canaux de sève, le dépérissement et la mort systématique de l’arbre.
@@ -30,7 +46,7 @@ En effet, une phase dite cryptique existe chez les agrumes infectés par le HLB 
 Une fois visibles, les symptômes, notamment le jaunissement des feuilles, peuvent être confondus avec des carences. 
 
 <p class="center">
-  <img src="arbre-malade.jpg" class="responsive-img"> 
+  <img src="arbre-malade.png" class="responsive-img"> 
 </p>
 
 Aucun traitement n’est concluant à l’heure actuelle. La méthode de lutte principale reste donc l’arrachage des arbres infectés.
@@ -39,14 +55,14 @@ Aucun traitement n’est concluant à l’heure actuelle. La méthode de lutte p
 
 <p class="center">
   <img src="psylle.png" class="responsive-img"> 
-  <img src="psylle2.jpg" class="responsive-img"> 
+  <img src="psylle2.jpg" class="responsive-img">
 </p>
 
 
 Pour lutter contre la maladie, les plants malades ont été arrachés en nombre, des plants sains ont été fournis et des parasitoïdes des psylles ont été introduits en 1974 et 1978. Grâce à l’absence de parasite secondaire, *Tamarixia dryi* et *Tamarixia radiata* ont effectivement parasité respectivement *Trioza erytreae* et *Diaphorina citri*. Les populations de psylles ont diminué dans les vergers, mais également en dehors, par exemple sur *Murraya paniculata*, réservoir à vecteur. 
 
 <p class="center">
-  <img src="parasitoide.png" class="responsive-img"> 
+  <img src="parasitoide.png" class="responsive-img">
 </p>
 
 
@@ -69,10 +85,10 @@ Depuis 2015, de nouveaux cas de HLB ont été observés sur l’île. Les parasi
 
 *** 
 
-Dernière mise à jour : 2021-10-25
+Dernière mise à jour : 2021-11-22
 
 Logo ©[DoAna](https://doana-r.com)  
-Photographies ©    
+Photographies : © Romuald Fontaine, FDGDON ; Gilles Cellier et Bruno Hostachy, Anses ; Antoine Franck, CIRAD.
 
 Le contenu écrit de cette application est disponible sous [licence CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) et le code sous [licence MIT](https://mit-license.org/) (© [DoAna](https://www.doana-r.com/) 2021).
 

@@ -139,13 +139,15 @@ function(req) {
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
             leafletOutput("situation_map")),
             icon("question-circle"),
-            "Les coordonnées des parcelles ont été légèrement modifiées pour préserver l'anonymat des agriculteurs." # textui
+            "Les prélèvements géolocalisés étant des données personnelles, ici nous extrapolons de ces données les zones de présence du HLB à la Réunion." # textui
         ),
         
         column(
           width = 4,
           box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
+            
+            "Les curseurs ci-dessous vous permettent d’afficher la situation sanitaire pour une période, pour une classe d’altitudes ou pour une commune donnée.", # textui
 
             ## time ####
             sliderInput(
@@ -173,7 +175,7 @@ function(req) {
             hr(),
             
             ## temporal evolution ####
-            p(strong("Surface échantillonnée par commune")), # textui
+            p(strong("Surface échantillonnée par commune (en hectare)")), # textui
             echarts4rOutput("surf_commune", height = "300px"),
             
             # br(),
