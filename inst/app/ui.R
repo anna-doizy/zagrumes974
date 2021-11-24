@@ -182,11 +182,46 @@ function(req) {
             # ## pluviométrie ####
             # p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
             # checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
-          ) # end of absolute panel
+          ) # end of box
         )
       ))
       
+      # onglet Modéliser une épidémie ####
       
+      , tabItem(tabName = "modele", fluidRow(
+        column(
+          width = 6,
+          box(
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Modéliser une épidémie")), # tesxtui
+            em("Expliquer ici le principe du modèle et qu'est-ce que ça veut dire un paramètre ? Il faut que quelqu'un d'extérieur puisse comprendre !!!"),
+            br(),
+            # ici les inputs
+            # ATTENTION textui
+            radioButtons("duree", label = "Durée de la simulation (en jours)", choices = c(100, 365), inline = TRUE),
+            radioButtons("seuil", label = "Seuil de transmission", choiceValues = c(0, 5000), choiceNames = c("transmission non limitée par la distance", "pas de transmission au delà de 5 kilomètres")),
+            radioButtons("effort", label = "Fréquence d'arrachage des arbres malades (en jours)", choices = c(30, 365), inline = TRUE),
+            radioButtons("r0", label = "R0 (taux de reproduction de la maladie)", choices = c(1, 5), inline = TRUE),
+            br(),
+            "pourquoi ne pas mettre un graphique de ce type pour chaque simu ?",
+            img(src = "simulations/test-graph-simu-temps.png")
+          )
+        ),
+        
+        column(
+          width = 6,
+          box(
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Evolution de l'épidémie sur un parcellaire fictif")), # textui
+            
+            includeMarkdown(sprintf("locale/explication-gif_%s.md", lang)), # EN
+            
+            # img(src = "simulations/duree100seuil0effort30R01.gif", width = 700, height = 700) # test : A FAIRE rendre responsive
+            # ici les image output
+            imageOutput("simu_gif")
+            
+            
+          ) # end of box
+        )
+      ))
       
       # Onglet en savoir plus ####
       , tabItem(tabName = "savoirplus", fluidRow(

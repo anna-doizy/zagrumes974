@@ -114,6 +114,11 @@ server <- function(input, output, session) {
     # ordre des communes
     # prevenir de quand on sélectionne un jeu de 0 lignes ?
   })
+  
+  
+  output$simu_gif <- renderImage({
+    list(src = paste0("./www/simulations/duree", input$duree, "seuil", input$seuil, "effort", input$effort, "R0", input$r0,".gif"))
+  }, deleteFile = FALSE)
 
  
   
