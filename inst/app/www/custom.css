@@ -26,20 +26,6 @@ body {
   color: #ffffff;
 }
 
-/*.box.box-solid.box-success > .box-header {
-  background: #16771f;
-  background-color: #16771f;
-}
-
-.box.box-solid.box-success {
-  border: 1px solid #16771f;
-}*/
-
-.box.box-success {
-  border: 0;
-  box-shadow: none;
-}
-
 .skin-green .sidebar-menu > li.active > a, .skin-green .sidebar-menu > li > a {
   color: #ffffff;
 }
@@ -55,6 +41,10 @@ a:focus, a:hover {
 
 a {
   color: #8d4e00;
+}
+
+code {
+  color: #16771f;
 }
 
 .content-wrapper {
@@ -85,6 +75,27 @@ hr {
   margin-top: 50px; /* PB responsive, résoudre avec padding ? */
 }
 
+
+
+/* boxes */
+
+/*.box.box-solid.box-success > .box-header {
+  background: #16771f;
+  background-color: #16771f;
+}
+
+.box.box-solid.box-success {
+  border: 1px solid #16771f;
+}*/
+
+.box.box-success {
+  border: 0;
+  box-shadow: none;
+}
+
+.box-header .box-title {
+  font-size: 150%;
+}
 
 
 
@@ -159,7 +170,7 @@ hr {
 } */
 
 
-#simu_gif img {
+#simu_gif img, #simu_graph img {
   width: 85vw; 
   max-width: 700px;
 }

@@ -23,6 +23,9 @@ server <- function(input, output, session) {
 
   })
   
+  
+  ## Filter the data ####
+  
   prelev_sel <- reactive({
     prelev %>% 
       filter(
@@ -31,6 +34,7 @@ server <- function(input, output, session) {
       )
   })  
   
+  ## Plot the map ####
   
   output$situation_map <- renderLeaflet({
     leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
@@ -56,24 +60,9 @@ server <- function(input, output, session) {
   })
   
 
+  ## Update the map ####
+  
   observe({
-    
-    # pourquoi ça ne fonctionne pas ?
-    
-    # ifelse(input$pluvio_check,
-    #   
-    #   leafletProxy("situation_map")  %>%
-    #     addPolylines(
-    #       data = pluvio,
-    #       color = ~ colorNumeric("Blues", r_median)(r_median),
-    #       # fillColor = "transparent",
-    #       noClip = TRUE,
-    #       layerId = "pluvio_layer"
-    #     ),
-    #   leafletProxy("situation_map") %>%
-    #     removeShape("pluvio_layer")
-    # )
-
 
     leafletProxy("situation_map") %>%
       clearMarkers() %>% 
@@ -90,6 +79,7 @@ server <- function(input, output, session) {
 
   })
   
+  ## Plot the barplot for displaying healphy and unhealphy areas ####
   
   output$surf_commune <- renderEcharts4r({
     if(nrow(prelev_sel()) > 0) # in the case where nothing is selected: don't plot the graph
@@ -99,7 +89,7 @@ server <- function(input, output, session) {
         summarise(Surface = sum(Surface)) %>%
         pivot_wider(names_from = Maladie, values_from = Surface, values_fill = 0) %>%
         ungroup() %>%
-        arrange(COMMUNE) %>% # par taille totale de la commune ou de la SAU
+        arrange(COMMUNE) %>% # A FAIRE : par surface totale en agrume
         e_chart(COMMUNE) %>%
         e_bar(Malade, stack = "maladie") %>%
         e_bar(Sain, stack = "maladie") %>%
@@ -115,6 +105,12 @@ server <- function(input, output, session) {
     # prevenir de quand on sélectionne un jeu de 0 lignes ?
   })
   
+  
+  ## Display the model results ####
+  
+  output$simu_graph <- renderImage({
+    list(src = paste0("./www/simulations/duree", input$duree, "seuil", input$seuil, "effort", input$effort, "R0", input$r0,".png"))
+  }, deleteFile = FALSE)
   
   output$simu_gif <- renderImage({
     list(src = paste0("./www/simulations/duree", input$duree, "seuil", input$seuil, "effort", input$effort, "R0", input$r0,".gif"))

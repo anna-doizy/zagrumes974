@@ -137,9 +137,9 @@ function(req) {
         column(
           width = 8,box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
-            leafletOutput("situation_map")),
-            icon("question-circle"),
-            "Les prélèvements géolocalisés étant des données personnelles, ici nous extrapolons de ces données les zones de présence du HLB à la Réunion." # textui
+            leafletOutput("situation_map"))
+            # icon("question-circle"),
+            # "Les prélèvements géolocalisés étant des données personnelles, ici nous extrapolons de ces données les zones de présence du HLB à la Réunion." # textui
         ),
         
         column(
@@ -147,7 +147,7 @@ function(req) {
           box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
             
-            "Les curseurs ci-dessous vous permettent d’afficher la situation sanitaire pour une période, pour une classe d’altitudes ou pour une commune donnée.", # textui
+            includeMarkdown(sprintf("locale/explication-interpolation_%s.md", lang)), # EN
 
             ## time ####
             sliderInput(
@@ -190,33 +190,38 @@ function(req) {
       
       , tabItem(tabName = "modele", fluidRow(
         column(
-          width = 6,
+          width = 7,
           box(
-            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Modéliser une épidémie")), # tesxtui
-            em("Expliquer ici le principe du modèle et qu'est-ce que ça veut dire un paramètre ? Il faut que quelqu'un d'extérieur puisse comprendre !!!"),
-            br(),
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Modéliser une épidémie")), # textui
+            
+            includeMarkdown(sprintf("locale/explication-modele_%s.md", lang)), # EN
+            
             # ici les inputs
             # ATTENTION textui
-            radioButtons("duree", label = "Durée de la simulation (en jours)", choices = c(100, 365), inline = TRUE),
-            radioButtons("seuil", label = "Seuil de transmission", choiceValues = c(0, 5000), choiceNames = c("transmission non limitée par la distance", "pas de transmission au delà de 5 kilomètres")),
-            radioButtons("effort", label = "Fréquence d'arrachage des arbres malades (en jours)", choices = c(30, 365), inline = TRUE),
-            radioButtons("r0", label = "R0 (taux de reproduction de la maladie)", choices = c(1, 5), inline = TRUE),
-            br(),
-            "pourquoi ne pas mettre un graphique de ce type pour chaque simu ?",
-            img(src = "simulations/test-graph-simu-temps.png")
+            
+            column(
+              width = 6,
+              radioButtons("r0", label = "R0 (taux de reproduction de la maladie)", choices = c(1, 5), inline = TRUE),
+              radioButtons("seuil", label = "Seuil de transmission", choiceValues = c(0, 5000), choiceNames = c("transmission non limitée par la distance", "pas de transmission au delà de 5 kilomètres")),
+              ),
+            
+            column(
+              width = 6,
+              radioButtons("effort", label = "Fréquence d'arrachage des arbres malades (en jours)", choices = c(30, 365), inline = TRUE),
+              radioButtons("duree", label = "Durée de la simulation (en jours)", choices = c(100, 365), inline = TRUE)
+            )
+
+            
           )
         ),
         
         column(
-          width = 6,
+          width = 5,
           box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("Evolution de l'épidémie sur un parcellaire fictif")), # textui
             
-            includeMarkdown(sprintf("locale/explication-gif_%s.md", lang)), # EN
-            
-            # img(src = "simulations/duree100seuil0effort30R01.gif", width = 700, height = 700) # test : A FAIRE rendre responsive
-            # ici les image output
-            imageOutput("simu_gif")
+            imageOutput("simu_graph"), # A FAIRE rendre responsive
+            imageOutput("simu_gif", height = "700px") # A FAIRE rendre responsive
             
             
           ) # end of box
