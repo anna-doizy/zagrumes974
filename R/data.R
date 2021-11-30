@@ -41,11 +41,3 @@
 #' }
 "communes"
 
-
-#' polygon simple feature collection containing the median annual rainfall levels of Reunion island from 1986 to 2016
-#'
-#' @format sf with 4293 zones and 1 field
-#' \describe{
-#'   \item{r_median}{median rainfall}
-#' }
-"pluvio"

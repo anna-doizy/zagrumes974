@@ -20,8 +20,6 @@ communes <- read_sf("data-raw/communes.shp") %>%
   st_set_precision(1e6) %>% 
   st_make_valid() # probleme au PORT (st_is_valid)
 
-pluvio <- read_sf("data-raw/pluvio.shp") # A CHANGER
-
 
 set.seed(562)
 
@@ -47,6 +45,6 @@ surface_agrume <- readr::read_csv2("data-raw/somme surface commune.csv") %>%
   )
 
 
-usethis::use_data(prelev, communes, pluvio, overwrite = TRUE)
+usethis::use_data(prelev, communes, overwrite = TRUE)
 devtools::document() # modifier R/data.R
 
