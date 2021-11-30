@@ -3,13 +3,21 @@
 
 # A FAIRE -----------------------------------------------------------------
 
-# - Supprimer toute trace de la couche pluvio
-# - surface totale d'agrume par commune pour améliorer le graphique
-# - demande de mail pour Henri en passant par Isma
-# - intégrer les cartes interpolation
-# - intégrer les simulations (novembre)
-# - héberger les images ailleurs ? leur donner un titre ?
+# pour la carte
+# - intégrer les cartes interpolation triable par date (?)
+
+# curseur de tri pour la date (et plus l'altitude)
+# - sans tri : intégrer surface totale d'agrume par commune
+# - avec tri : seulement parmi les parcelles échantillonnées
+
 # - Erreur connue : s'il n'y a pas de Sain ou de Malade dans la table, le graphe est cassé NA
+
+
+# autre
+# - demande de mail pour Henri en passant par Isma EN COURS
+# - hébergement CIRAD : EN COURS
+# - héberger les images ailleurs ? leur donner un titre ?
+# - traduction anglais (pas urgent)
 
 
 # FAIT 
@@ -28,8 +36,8 @@
 # - quelle est l'unité de surface ? OK
 # - Il me faut la source des images OK
 # - unité de surface m² à transformer en ha : 1 ha = 10000 m² OK
-
-
+# - Supprimer toute trace de la couche pluvio OK
+# - intégrer les simulations OK
 
 # ----
 
