@@ -19,7 +19,7 @@
 
 *** 
 
-Dernière mise à jour : 2021-11-24
+Dernière mise à jour : 2021-11-30
 
 Logo ©[DoAna](https://doana-r.com)  
 Photographies ©    
@@ -28,7 +28,7 @@ Le contenu écrit de cette application est disponible sous [licence CC-BY-SA 4.0
 
 Ce site a été construit avec [R](https://www.r-project.org/) et [shiny](https://shiny.rstudio.com/).
 
-Code source : https://gitlab.com/doana-r/zagrumes974
+Code source : [https://gitlab.com/cirad-apps/zagrumes974](gitlab.com/cirad-apps/zagrumes974)
 
 
 

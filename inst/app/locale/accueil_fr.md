@@ -51,7 +51,10 @@ Une fois visibles, les symptômes, notamment le jaunissement des feuilles, peuve
 
 Aucun traitement n’est concluant à l’heure actuelle. La méthode de lutte principale reste donc l’arrachage des arbres infectés.
 
-À la Réunion, une première épidémie de HLB a eu lieu dans les années 1970-1980 en lien avec la présence de deux espèces de bactérie (*Candidatus Liberibacter asiaticus* et *Candidatus Liberibacter africanus*) et des deux espèces de psylles vectrices *Trioza erytreae* et *Diaphorina citri*. 
+À la Réunion, une première épidémie de HLB a eu lieu dans les années 1970-1980 en lien avec la présence de deux espèces de bactérie (*Candidatus Liberibacter asiaticus* et *Candidatus Liberibacter africanus*) et des deux espèces de psylles vectrices *Trioza erytreae* et *Diaphorina citri*.
+
+Les populations observées laissent à penser que seul *Diaphorina citri* serait un vecteur actif dans la réemergence du HLB qui touche la Réunion depuis 2015. 
+L’altitude étant un facteur limitant pour ces psylles, la maladie ne peut être présente au-delà de 800 mètres ou du moins ne peut pas se propager à ces altitudes.
 
 <p class="center">
   <img src="psylle.png" class="responsive-img"> 
@@ -85,7 +88,7 @@ Depuis 2015, de nouveaux cas de HLB ont été observés sur l’île. Les parasi
 
 *** 
 
-Dernière mise à jour : 2021-11-24
+Dernière mise à jour : 2021-11-30
 
 Logo ©[DoAna](https://doana-r.com)  
 Photographies : © Romuald Fontaine, FDGDON ; Gilles Cellier et Bruno Hostachy, Anses ; Antoine Franck, CIRAD.
@@ -94,7 +97,7 @@ Le contenu écrit de cette application est disponible sous [licence CC-BY-SA 4.0
 
 Ce site a été construit avec [R](https://www.r-project.org/) et [shiny](https://shiny.rstudio.com/).
 
-Code source : https://gitlab.com/doana-r/zagrumes974
+Code source : [https://gitlab.com/cirad-apps/zagrumes974](gitlab.com/cirad-apps/zagrumes974)
 
 
 

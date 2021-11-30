@@ -17,9 +17,8 @@ La [FDGDON, Clinique du Végétal](http://www.fdgdon974.fr) située à la Réuni
 ## Remerciements
 
 
-La **chasse au HLB** a été réalisée par XXX.
-
-Merci aux partenaires XXX pour ...
+La **production des données** a été établie en premier lieu dans le cadre de la surveillance officielle du HLB par la DAAF, la FDGDON et l'ANSES. 
+Une autre partie des données provient des programmes de recherche de l'UMR PVBMT du CIRAD.
 
 La **conception, la création et la réalisation de l’interface web** ont été coordonnées par Anna Doizy ([DoAna - Statistiques Réunion](https://doana-r.com)).
 
