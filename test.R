@@ -7,6 +7,8 @@
 # - intégrer les cartes interpolation triable par date (?)
 
 # curseur de tri pour la date (et plus l'altitude)
+
+# pour le barplot
 # - sans tri : intégrer surface totale d'agrume par commune
 # - avec tri : seulement parmi les parcelles échantillonnées
 
@@ -16,6 +18,7 @@
 # autre
 # - demande de mail pour Henri en passant par Isma EN COURS
 # - hébergement CIRAD : EN COURS
+# - optimiser la taille des images avec https://riot-optimizer.com/
 # - héberger les images ailleurs ? leur donner un titre ?
 # - traduction anglais (pas urgent)
 
@@ -84,25 +87,99 @@ ggplot(prelev) +
 #   e_theme_custom('{"color":["#16771f","#eb8200"]}')
 
 
+# # pour essayer de corrifer l'erreur de si pas de malade OU de sain dans prelev_sel, le graphe est cassé
+# 
+# prelev %>% # ici filter avec les input DATE & ALTITUDE
+#   as_tibble() %>%
+#   group_by(COMMUNE, Maladie) %>%
+#   summarise(Surface = sum(Surface)) %>% 
+#   pivot_wider(names_from = Maladie, values_from = Surface, values_fill = 0) %>% 
+#   ungroup() %>% 
+#   arrange(Sain, Malade) %>% # par taille totale de la commune ou de la SAU
+#   e_chart(COMMUNE) %>% 
+#   {if("Malade" %in% names(.$x$data[[1]])) e_bar(Malade, stack = "maladie") else . }%>%
+#   {if("Sain" %in% names(.$x$data[[1]])) e_bar(Sain, stack = "maladie") else . }%>%
+#   e_tooltip(trigger = "axis") %>% 
+#   # e_flip_coords() %>%  # marche pas avec le tooltip formatter...
+#   # e_grid(left = "30%") %>% 
+#   e_y_axis(formatter = e_axis_formatter(locale = lang)) %>% 
+#   e_tooltip(trigger = "axis", formatter = e_tooltip_pointer_formatter(locale = lang, digits = 0)) %>% 
+#   e_theme_custom('{"color":["#eb8200","#16771f"]}')
+# # y ajouter la surface agricole totale par commune
 
 
-prelev %>% # ici filter avec les input DATE & ALTITUDE
-  as_tibble() %>%
-  group_by(COMMUNE, Maladie) %>%
-  summarise(Surface = sum(Surface)) %>% 
-  pivot_wider(names_from = Maladie, values_from = Surface, values_fill = 0) %>% 
+# 2021-11-22
+# passage en ggplot
+
+couleurs_barplot <- c(Sain = "#16771f", Malade = "#eb8200", Non_ech = "#c6baa0")
+labels_barplot <- c(Sain = "Saine", Malade = "Malade",  Non_ech = "Non échantillonnée") # textui / "non éch ou non selec" pour être exacte : comment l'expliquer simplement ?
+input_fill <- T # cocher si on veut voir la surface en ha ou en %
+
+prelev_sel <- prelev %>% filter(Date < as.Date("2018-06-30")) # filtre user
+
+
+surface_nonech <- prelev_sel %>%
+  group_by(COMMUNE) %>% 
+  summarise(Surface_ech = sum(Surface)) %>% # calcul de la surface échantillonnée par commune
   ungroup() %>% 
-  arrange(Sain, Malade) %>% # par taille totale de la commune ou de la SAU
-  e_chart(COMMUNE) %>% 
-  {if("Malade" %in% names(.$x$data[[1]])) e_bar(Malade, stack = "maladie") else . }%>%
-  {if("Sain" %in% names(.$x$data[[1]])) e_bar(Sain, stack = "maladie") else . }%>%
-  e_tooltip(trigger = "axis") %>% 
-  # e_flip_coords() %>%  # marche pas avec le tooltip formatter...
-  # e_grid(left = "30%") %>% 
-  e_y_axis(formatter = e_axis_formatter(locale = lang)) %>% 
-  e_tooltip(trigger = "axis", formatter = e_tooltip_pointer_formatter(locale = lang, digits = 0)) %>% 
-  e_theme_custom('{"color":["#eb8200","#16771f"]}')
-# y ajouter la surface agricole totale par commune
+  inner_join(surface_agrume) %>% 
+  mutate(
+    Surface = Surface_tot - Surface_ech, # surface non échantilonnée par commune
+    Maladie = "Non_ech"
+  ) %>% 
+  select(COMMUNE, Maladie, Surface)
+
+prelev_sel %>%
+  group_by(COMMUNE, Maladie) %>%
+  summarise(Surface = sum(Surface)) %>%  
+  ungroup() %>% 
+  bind_rows(surface_nonech) %>%
+  ggplot() +
+  aes(x = COMMUNE %>% fct_reorder(Surface, .fun = sum), y = Surface, fill = Maladie %>% fct_relevel("Non_ech")) + # A FAIRE : en sorte que le fct_reorder ne change pas l'ordre des communes à chaque fois que l'utilisateur bouge un truc
+  geom_col(position = ifelse(input_fill, "fill", "stack"), width = 0.7) +
+  coord_flip() +
+  scale_fill_manual(values = couleurs_barplot, labels = labels_barplot) + 
+  labs(y = ifelse(input_fill, "Surface en agrumes (%)", "Surface en agrumes (hectares)"), x = "", fill = "Etat de la parcelle") + # textui
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# plotly::ggplotly(bar_plot) # mouais...
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

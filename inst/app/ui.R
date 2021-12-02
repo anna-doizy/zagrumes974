@@ -3,12 +3,14 @@
 suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
-  library(shinyhelper)
+  library(shinyhelper) # ???
+  library(shinyWidgets)
   library(dplyr)
   library(tidyr)
+  library(forcats)
+  library(ggplot2)
   library(sf)
   library(leaflet)
-  library(echarts4r)
   library(zagrumes974)
 })
 
@@ -100,7 +102,7 @@ function(req) {
       #     
       #     p(),
       #     
-      #     ## time ####
+      #     ## time
       #     sliderInput(
       #       "periode",
       #       label = strong("Choix de la période"), # textui
@@ -111,7 +113,7 @@ function(req) {
       #       ticks = FALSE
       #     ),
       #     
-      #     # elevation ####
+      #     # elevation
       #     sliderInput(
       #       "altitude",
       #       label = strong("Choix de l'altitude"), # textui
@@ -121,12 +123,12 @@ function(req) {
       #       ticks = FALSE
       #     ),
       #     
-      #     ## temporal evolution ####
+      #     ## temporal evolution
       #     p(strong("Surface échantillonnée par commune")), # textui
       #     echarts4rOutput("surf_commune", height = "auto"),
       #     
       #     br(),
-      #     ## pluviométrie ####
+      #     ## pluviométrie
       #     p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
       #     checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
       #   ), # end of absolute panel
@@ -135,7 +137,8 @@ function(req) {
       
       , tabItem(tabName = "situation", fluidRow(
         column(
-          width = 8,box(
+          width = 7,
+          box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
             leafletOutput("situation_map"))
             # icon("question-circle"),
@@ -143,12 +146,10 @@ function(req) {
         ),
         
         column(
-          width = 4,
+          width = 5,
           box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
             
-            includeMarkdown(sprintf("locale/explication-interpolation_%s.md", lang)), # EN
-
             ## time ####
             sliderInput(
               "periode",
@@ -161,27 +162,31 @@ function(req) {
               ticks = FALSE
             ),
             
-            # elevation ####
-            sliderInput(
-              "altitude",
-              label = strong("Choix de l'altitude"), # textui
-              min = 0,
-              max = 3000,
-              value = c(0, 3000),
-              width = "80%",
-              ticks = FALSE
+            includeMarkdown(sprintf("locale/explication-interpolation_%s.md", lang)), # EN
+            
+            
+            # cocher si on veut voir la surface en ha ou en %
+            materialSwitch(
+              "stack_fill",
+              label = strong("Surface en hectare / pourcentage") # textui
             ),
             
-            hr(),
+            # # elevation
+            # sliderInput(
+            #   "altitude",
+            #   label = strong("Choix de l'altitude"), # textui
+            #   min = 0,
+            #   max = 3000,
+            #   value = c(0, 3000),
+            #   width = "80%",
+            #   ticks = FALSE
+            # ),
+            
             
             ## temporal evolution ####
-            p(strong("Surface échantillonnée par commune (en hectare)")), # textui
-            echarts4rOutput("surf_commune", height = "300px"),
+            p(strong("Surface échantillonnée par commune")), # textui
+            plotOutput("surf_commune")
             
-            # br(),
-            # ## pluviométrie ####
-            # p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
-            # checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
           ) # end of box
         )
       ))

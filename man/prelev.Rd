@@ -9,7 +9,7 @@ data.frame 267x7
 \describe{
 \item{Id}{Plot identifier}
 \item{X, Y}{WGS84 coordinates of the plot barycentre}
-\item{Surface}{Area of the plot}
+\item{Surface}{Area of the plot in square meters}
 \item{Altitude}{Elevation of the plot}
 \item{Maladie}{Presence (1) or absence (0) of the disease}
 \item{Date}{Date of the observation}

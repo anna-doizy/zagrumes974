@@ -45,6 +45,6 @@ surface_agrume <- readr::read_csv2("data-raw/somme surface commune.csv") %>%
   )
 
 
-usethis::use_data(prelev, communes, overwrite = TRUE)
+usethis::use_data(prelev, communes, surface_agrume, overwrite = TRUE)
 devtools::document() # modifier R/data.R
 

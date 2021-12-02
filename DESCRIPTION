@@ -17,10 +17,12 @@ Imports:
     dplyr,
     sf,
     leaflet,
+    ggplot2,
+    forcats,
     shiny,
     shinydashboard,
     shinyhelper,
-    echarts4r,
+    shinyWidgets,
     tidyr
 Encoding: UTF-8
 LazyData: true
