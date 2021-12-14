@@ -8,8 +8,6 @@ server <- function(input, output, session) {
 
 
   # Observe -----------------------------------------------------------------
-  
-  observe_helpers()
 
   ## Get language in the url ####
   lang <- dyn <- NULL

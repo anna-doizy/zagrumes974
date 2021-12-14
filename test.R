@@ -35,7 +35,7 @@
 # - intégrer les cartes interpolation triable par date OK
 # - gérer le proxy de telle sorte que la carte s'affiche tout de suite OK
 # - quelle palette de couleurs pour la carte d'interpolation ? OK
-# - Ereur : les graphiques simu sont coupés OK
+# - Erreur : les graphiques simu sont coupés OK
 
 
 # ----
