@@ -19,7 +19,7 @@
 #' }
 "textesUI"
 
-#' Raw data of the presence of the disease
+#' Raw data of the presence of the disease for the barplot
 #'
 #' @format data.frame 267x7
 #' \describe{
@@ -50,3 +50,22 @@
 #'   \item{COMMUNE}{Municipality name}
 #' }
 "surface_agrume"
+
+#' Barycentres of the citrus plots in Reunion
+#'
+#' @format data.frame 782x3
+#' \describe{
+#'   \item{ID}{Plot identifier}
+#'   \item{longitude, latitude}{WGS84 coordinates of the plot barycentre}
+#' }
+"par"
+
+#' Raw data of the presence of the disease for the interpolation
+#'
+#' @format data.frame 616x4
+#' \describe{
+#'   \item{id}{Plot identifier}
+#'   \item{longitude, latitude}{WGS84 coordinates of the plot barycentre}
+#'   \item{date}{Date of the observation}
+#' }
+"hlu"

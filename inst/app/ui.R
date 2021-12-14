@@ -3,13 +3,14 @@
 suppressPackageStartupMessages({
   library(shiny)
   library(shinydashboard)
-  library(shinyhelper) # ???
   library(shinyWidgets)
+  library(MASS)
   library(dplyr)
   library(tidyr)
   library(forcats)
   library(ggplot2)
   library(sf)
+  library(raster)
   library(leaflet)
   library(zagrumes974)
 })
@@ -150,6 +151,14 @@ function(req) {
           box(
             status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
             
+            # cocher si on veut voir la surface en ha ou en %
+            materialSwitch(
+              "agrumes_hlb",
+              label = strong("Densité en agrumes / Densité en HLB") # textui
+            ),
+            
+            br(),
+            
             ## time ####
             sliderInput(
               "periode",
@@ -161,6 +170,7 @@ function(req) {
               width = "80%",
               ticks = FALSE
             ),
+            
             
             includeMarkdown(sprintf("locale/explication-interpolation_%s.md", lang)), # EN
             

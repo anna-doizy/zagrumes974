@@ -2,9 +2,9 @@ Nous vous proposons ici de présenter les résultats d'un **modèle de développ
 
 ### Mise en place et définition
 
-Les parcelles d'agrumes ont des surfaces variant entre 0 et 7 hectares.
-Les parcelles les plus éloignées les unes des autres le sont d’environ 5 kilomètres. 
-***[taille totale du carré ?]***
+Le parcellaire fictif fait 67 kilomètres de côté. Il contient 500 parcelles dont les surfaces varient entre 0 et 7 hectares.
+
+Malgré le choix de représentation avec des gros points, notez bien que les parcelles ne se touchent pas. Elles sont éloignées au moins de 60 mètres les unes des autres.
 
 Nous définissons l'**état sanitaire** d'une parcelle de la manière suivante :
 
@@ -14,12 +14,12 @@ Nous définissons l'**état sanitaire** d'une parcelle de la manière suivante :
 - **arrachée** : la parcelle a été arrachée (noir)
 
 NB : Un arbre infecté finira par mourir que ce soit en plusieurs mois ou quelques années. 
-Ici les temps de simulations sont trop courts pour que la possibilité d’une mort autre que par arrachage soit constatée.
+Ici, les temps de simulations sont trop courts pour que la possibilité d’une mort autre que par arrachage soit constatée.
 
 
 ### Initialisation du modèle
 
-Une parcelle est infectée par le HLB au jour 1 ***(ou 0 ?)***.
+Une parcelle est infectée par le HLB au jour 1.
 
 
 ### Evolution du modèle
@@ -37,7 +37,7 @@ Tous les jours, chaque parcelle contenant un arbre malade va en contaminer d'aut
 
 ### Représentation des résultats du modèle
 
-- Le premier graphique montre l'évolution de l'état sanitaire des ***(combien ?)*** parcelles au cours de la simulation.
+- Le premier graphique montre l'évolution de l'état sanitaire des 500 parcelles au cours de la simulation.
 
 - En-dessous, vous pouvez observer la carte du parcellaire qui évolue au fil des jours.
   Chaque point représente une parcelle d'agrumes.

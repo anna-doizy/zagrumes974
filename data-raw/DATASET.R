@@ -11,15 +11,10 @@ usethis::use_data(onglets, textesUI, overwrite = TRUE)
 devtools::document()
 
 
-# Carte -------------------------------------------------------------------
+
+# Barplot -----------------------------------------------------------------
 
 library(dplyr)
-library(sf)
-
-communes <- read_sf("data-raw/communes.shp") %>% 
-  st_set_precision(1e6) %>% 
-  st_make_valid() # probleme au PORT (st_is_valid)
-
 
 set.seed(562)
 
@@ -45,6 +40,43 @@ surface_agrume <- readr::read_csv2("data-raw/somme surface commune.csv") %>%
   )
 
 
-usethis::use_data(prelev, communes, surface_agrume, overwrite = TRUE)
+usethis::use_data(prelev, surface_agrume, overwrite = TRUE)
 devtools::document() # modifier R/data.R
+
+
+
+# Carte -------------------------------------------------------------------
+
+library(dplyr)
+library(sf)
+
+communes <- read_sf("data-raw/communes.shp") %>% 
+  st_set_precision(1e6) %>% 
+  st_make_valid() # probleme au PORT (st_is_valid)
+
+
+# parcellaire d'agrumes
+par <- read.csv2("data-raw/justagru.csv")
+
+# présence de HLB
+hlu <- read.csv2("data-raw/hlbposi.csv") %>%  
+  mutate(date = lubridate::dmy(date)) #%>% 
+  # filter(between(date, as.Date("2019-06-25"), as.Date("2020-05-29")))
+# a faire : ajouter la colonne date pour pouvoir trier par date
+
+# limites <- c(55.2, 55.85, -21.45, -20.85)
+
+# kernel_par <- kde2d(par$longitude, par$latitude, n = 200, lims = limites)
+# kernel_hlu <- kde2d(hlu$longitude, hlu$latitude, n = 200, lims = limites)
+
+# raster_agrumes <- raster(kernel_par)
+# raster_hlb <- raster(list(x = kernel_hlu$x , y = kernel_hlu$y, z = kernel_hlu$z / (kernel_par$z + 50)))
+
+usethis::use_data(communes, par, hlu, overwrite = TRUE)
+devtools::document() # modifier R/data.R
+
+
+
+
+
 

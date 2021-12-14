@@ -37,47 +37,141 @@ server <- function(input, output, session) {
   ## Plot the map ####
   
   output$situation_map <- renderLeaflet({
+    
+    limites <- c(55.2, 55.85, -21.45, -20.85)
+    kernel_par <- kde2d(par$longitude, par$latitude, n = 200, lims = limites)
+    raster_agrumes <- raster(kernel_par) %>% crop(communes) %>% mask(communes)
+    
+    
     leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
       addProviderTiles("Stamen.Terrain") %>%
-      setView(55.5, -21.12, zoom = 10) %>%
+      setView(55.5, -21.12, zoom = 10) %>% 
+      addRasterImage(
+        raster_agrumes,
+        colors = "YlGn",
+        opacity = 0.7
+      ) %>%
       addPolygons(
-        data = communes, 
-        color = "#000", 
-        fillOpacity = 0, 
-        popup =  ~ COMMUNE, 
+        data = communes,
+        color = "#000",
+        fillOpacity = 0,
+        popup =  ~ COMMUNE,
         weight = 2
       ) %>% 
-      addMarkers(
-        ~X, ~Y, data = prelev %>% filter(Maladie == "Sain"), 
-        popup = "Présence de HLB non observée dans ce verger", # textui
-        icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
-      ) %>%
-      addMarkers(
-        ~X, ~Y, data = prelev %>% filter(Maladie == "Malade"), 
-        popup = "Présence de HLB observée dans ce verger", # textui
-        icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
-      )
+      suppressWarnings()
   })
   
-
+  
   ## Update the map ####
   
   observe({
+    
+    limites <- c(55.2, 55.85, -21.45, -20.85)
+    kernel_par <- kde2d(par$longitude, par$latitude, n = 200, lims = limites)
+    raster_agrumes <- raster(kernel_par) %>% crop(communes) %>% mask(communes)
+    
+    if(! input$agrumes_hlb) { # carte agrumes
+      leafletProxy("situation_map") %>%
+        clearImages() %>% 
+        clearShapes() %>% 
+        addRasterImage(
+          raster_agrumes,
+          colors = "YlGn",
+          # colors = colorNumeric("magma", reverse = TRUE, domain = raster_agrumes@data@values, na.color = "transparent"),
+          opacity = 0.7
+        ) %>%
+        addPolygons(
+          data = communes,
+          color = "#000",
+          fillOpacity = 0,
+          popup =  ~ COMMUNE,
+          weight = 2
+        ) %>% 
+        suppressWarnings()
+    } else { # carte hlb
+      hlu_sel <- hlu %>% filter(between(date, input$periode[1], input$periode[2]))
+    
+      if(nrow(hlu_sel) > 0 & class(try(kde2d(hlu_sel$longitude, hlu_sel$latitude, n = 200, lims = limites), silent = TRUE)) != "try-error") {
+  
+        kernel_hlu <- kde2d(hlu_sel$longitude, hlu_sel$latitude, n = 200, lims = limites)
+        raster_hlb <- raster(list(x = kernel_hlu$x , y = kernel_hlu$y, z = kernel_hlu$z / (kernel_par$z + 50))) %>% 
+          crop(communes) %>% mask(communes)
+        
+        leafletProxy("situation_map") %>%
+          clearImages() %>% 
+          clearShapes() %>% 
+          addRasterImage(
+            raster_hlb,
+            colors = "Reds",
+            opacity = 0.7
+          ) %>%
+          addPolygons(
+            data = communes,
+            color = "#000",
+            fillOpacity = 0,
+            popup =  ~ COMMUNE,
+            weight = 2
+          ) %>% 
+          suppressWarnings()
+  
+      } else {
+        leafletProxy("situation_map") %>%
+          clearImages() %>% 
+          clearShapes()
+      }
+      
+    }
+    
+    
 
-    leafletProxy("situation_map") %>%
-      clearMarkers() %>% 
-      addMarkers(
-        ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Sain"), 
-        popup = "Présence de HLB non observée dans ce verger", # textui
-        icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
-      ) %>%
-      addMarkers(
-        ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Malade"), 
-        popup = "Présence de HLB observée dans ce verger", # textui
-        icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
-      )
-
+      
+    
   })
+  
+  # ## Plot the map ####
+  # 
+  # output$situation_map <- renderLeaflet({
+  #   leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
+  #     addProviderTiles("Stamen.Terrain") %>%
+  #     setView(55.5, -21.12, zoom = 10) %>%
+  #     addPolygons(
+  #       data = communes, 
+  #       color = "#000", 
+  #       fillOpacity = 0, 
+  #       popup =  ~ COMMUNE, 
+  #       weight = 2
+  #     ) %>% 
+  #     addMarkers(
+  #       ~X, ~Y, data = prelev %>% filter(Maladie == "Sain"), 
+  #       popup = "Présence de HLB non observée dans ce verger", # textui
+  #       icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
+  #     ) %>%
+  #     addMarkers(
+  #       ~X, ~Y, data = prelev %>% filter(Maladie == "Malade"), 
+  #       popup = "Présence de HLB observée dans ce verger", # textui
+  #       icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
+  #     )
+  # })
+  # 
+  # 
+  # ## Update the map ####
+  # 
+  # observe({
+  # 
+  #   leafletProxy("situation_map") %>%
+  #     clearMarkers() %>% 
+  #     addMarkers(
+  #       ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Sain"), 
+  #       popup = "Présence de HLB non observée dans ce verger", # textui
+  #       icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
+  #     ) %>%
+  #     addMarkers(
+  #       ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Malade"), 
+  #       popup = "Présence de HLB observée dans ce verger", # textui
+  #       icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
+  #     )
+  # 
+  # })
   
   ## Plot the barplot for displaying healphy and unhealphy areas ####
   
@@ -121,7 +215,7 @@ server <- function(input, output, session) {
         Surface = Surface_tot - Surface_ech, # surface non échantilonnée par commune
         Maladie = "Non_ech"
       ) %>% 
-      select(COMMUNE, Maladie, Surface) %>% 
+      dplyr::select(COMMUNE, Maladie, Surface) %>% 
       suppressMessages() # join() message
     
     if(nrow(prelev_sel()) > 0) # in the case where nothing is selected: don't plot the graph

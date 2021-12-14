@@ -3,7 +3,7 @@
 \docType{data}
 \name{prelev}
 \alias{prelev}
-\title{Raw data of the presence of the disease}
+\title{Raw data of the presence of the disease for the barplot}
 \format{
 data.frame 267x7
 \describe{
@@ -19,6 +19,6 @@ data.frame 267x7
 prelev
 }
 \description{
-Raw data of the presence of the disease
+Raw data of the presence of the disease for the barplot
 }
 \keyword{datasets}
