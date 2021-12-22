@@ -75,7 +75,6 @@ server <- function(input, output, session) {
         addRasterImage(
           raster_agrumes,
           colors = "YlGn",
-          # colors = colorNumeric("magma", reverse = TRUE, domain = raster_agrumes@data@values, na.color = "transparent"),
           opacity = 0.7
         ) %>%
         addPolygons(
@@ -125,77 +124,8 @@ server <- function(input, output, session) {
       
     
   })
+ 
   
-  # ## Plot the map ####
-  # 
-  # output$situation_map <- renderLeaflet({
-  #   leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
-  #     addProviderTiles("Stamen.Terrain") %>%
-  #     setView(55.5, -21.12, zoom = 10) %>%
-  #     addPolygons(
-  #       data = communes, 
-  #       color = "#000", 
-  #       fillOpacity = 0, 
-  #       popup =  ~ COMMUNE, 
-  #       weight = 2
-  #     ) %>% 
-  #     addMarkers(
-  #       ~X, ~Y, data = prelev %>% filter(Maladie == "Sain"), 
-  #       popup = "Présence de HLB non observée dans ce verger", # textui
-  #       icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
-  #     ) %>%
-  #     addMarkers(
-  #       ~X, ~Y, data = prelev %>% filter(Maladie == "Malade"), 
-  #       popup = "Présence de HLB observée dans ce verger", # textui
-  #       icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
-  #     )
-  # })
-  # 
-  # 
-  # ## Update the map ####
-  # 
-  # observe({
-  # 
-  #   leafletProxy("situation_map") %>%
-  #     clearMarkers() %>% 
-  #     addMarkers(
-  #       ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Sain"), 
-  #       popup = "Présence de HLB non observée dans ce verger", # textui
-  #       icon = list(iconUrl = "orchard-healthy.svg", iconSize = c(50,50))
-  #     ) %>%
-  #     addMarkers(
-  #       ~X, ~Y, data = prelev_sel() %>% filter(Maladie == "Malade"), 
-  #       popup = "Présence de HLB observée dans ce verger", # textui
-  #       icon = list(iconUrl = "orchard-unhealthy.svg", iconSize = c(50,50))
-  #     )
-  # 
-  # })
-  
-  ## Plot the barplot for displaying healphy and unhealphy areas ####
-  
-  # output$surf_commune <- renderEcharts4r({
-  #   if(nrow(prelev_sel()) > 0) # in the case where nothing is selected: don't plot the graph
-  #   
-  #     prelev_sel() %>%
-  #       group_by(COMMUNE, Maladie) %>%
-  #       summarise(Surface = sum(Surface)) %>%
-  #       pivot_wider(names_from = Maladie, values_from = Surface, values_fill = 0) %>%
-  #       ungroup() %>%
-  #       arrange(COMMUNE) %>% # A FAIRE : par surface totale en agrume
-  #       e_chart(COMMUNE) %>%
-  #       e_bar(Malade, stack = "maladie") %>%
-  #       e_bar(Sain, stack = "maladie") %>%
-  #       e_tooltip(trigger = "axis") %>%
-  #       e_grid(left = "20%") %>% 
-  #       e_y_axis(formatter = e_axis_formatter(locale = lang)) %>%
-  #       e_tooltip(trigger = "axis", formatter = e_tooltip_pointer_formatter(locale = lang, digits = 0)) %>%
-  #       e_theme_custom('{"color":["#eb8200","#16771f"]}') %>%
-  #       suppressMessages() %>% suppressWarnings()
-  #   # y ajouter la surface agricole totale par commune
-  #   # theme ?
-  #   # ordre des communes
-  #   # prevenir de quand on sélectionne un jeu de 0 lignes ?
-  # })
   
   
   output$surf_commune <- renderPlot(res = 100, {
@@ -237,8 +167,7 @@ server <- function(input, output, session) {
   })
   
   
-  
-  
+
   
   ## Display the model results ####
   
