@@ -3,22 +3,22 @@
 \docType{data}
 \name{prelev}
 \alias{prelev}
-\title{Raw data of the presence of the disease for the barplot}
+\title{Presence of the disease per plot for the barplot}
 \format{
-data.frame 267x7
+data.frame 334x7
 \describe{
 \item{Id}{Plot identifier}
 \item{X, Y}{WGS84 coordinates of the plot barycentre}
-\item{Surface}{Area of the plot in square meters}
-\item{Altitude}{Elevation of the plot}
-\item{Maladie}{Presence (1) or absence (0) of the disease}
+\item{Surface}{Area of the plot in hectares}
+\item{Maladie}{Presence (Malade) or absence (Sain) of the disease}
 \item{Date}{Date of the observation}
+\item{COMMUNE}{Municipality of the observation}
 }
 }
 \usage{
 prelev
 }
 \description{
-Raw data of the presence of the disease for the barplot
+Several HLB samplings on the same plot may be possible, but if only one is positive, the whole plot is considered positive.
 }
 \keyword{datasets}

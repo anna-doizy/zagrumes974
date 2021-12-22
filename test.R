@@ -3,9 +3,7 @@
 
 # A FAIRE -----------------------------------------------------------------
 
-# - problème : pour les périodes restreintes la carte et le barplot ne correspondent pas
 
-# autre
 # - hébergement CIRAD : EN COURS
 # - donner un titre aux images de l'accueil
 # - traduction anglais
@@ -36,6 +34,7 @@
 # - gérer le proxy de telle sorte que la carte s'affiche tout de suite OK
 # - quelle palette de couleurs pour la carte d'interpolation ? OK
 # - Erreur : les graphiques simu sont coupés OK
+# - harmoniser les données avec les nouveau dataset hlu et parcellaire OK
 
 
 # ----
@@ -43,6 +42,111 @@
 library(zagrumes974)
 
 lang <- "fr"
+
+
+
+# Nouveau hlu -------------------------------------------------------------
+
+# 2021-12-22
+
+library(dplyr)
+library(raster)
+library(leaflet)
+library(ggplot2)
+
+donnee <- read.csv2("data-raw/hlu.csv") %>% 
+  mutate(Date = lubridate::dmy(Date))
+
+skimr::skim(donnee)
+
+# interpolation
+
+donnee_posi <- donnee %>% filter(HLB == 1)
+
+
+limites <- c(55.2, 55.85, -21.45, -20.85)
+kernel_par <- MASS::kde2d(par$longitude, par$latitude, n = 200, lims = limites)
+raster_agrumes <- raster(kernel_par) %>% crop(communes) %>% mask(communes)
+
+kernel_hlu <- MASS::kde2d(donnee_posi$Longitude, donnee_posi$Latitude, n = 200, lims = limites)
+raster_hlb <- raster(list(x = kernel_hlu$x , y = kernel_hlu$y, z = kernel_hlu$z / (kernel_par$z + 50))) %>% 
+  crop(communes) %>% mask(communes)
+
+leaflet(options = leafletOptions(maxZoom = 13, zoomControl = FALSE)) %>% # maxzoom anonymises data
+  addProviderTiles("Stamen.Terrain") %>%
+  setView(55.5, -21.12, zoom = 10) %>% 
+  addRasterImage(
+    raster_hlb,
+    colors = "Reds",
+    opacity = 0.7
+  ) %>%
+  addPolygons(
+    data = communes,
+    color = "#000",
+    fillOpacity = 0,
+    popup =  ~ COMMUNE,
+    weight = 2
+  )
+
+
+
+# bar plot
+
+donnee_prelev <- readr::read_csv2("data-raw/parcelles_prelevee.csv") %>% 
+  filter(!is.na(Date)) %>% # une date manquante
+  # select(-Type) %>% 
+  # st_as_sf(coords=c('X', 'Y'), crs = st_crs(communes), remove = FALSE) %>% 
+  # st_intersection(communes) %>%
+  # as_tibble() %>% 
+  mutate(
+    Date = lubridate::dmy(Date),
+    Maladie = factor(Maladie, labels = c(`0` = "Sain", `1` = "Malade"))
+    # X = X + rnorm(n(), sd = 0.01), # anonymisation
+    # Y = Y + rnorm(n(), sd = 0.01),
+    # Surface = Surface / 10000 # conversion m² -> ha
+  )
+
+
+
+couleurs_barplot <- c(Sain = "#16771f", Malade = "#eb8200", Non_ech = "#c6baa0")
+labels_barplot <- c(Sain = "Saine", Malade = "Malade",  Non_ech = "Non échantillonnée") # textui
+stack_fill <- FALSE # input
+
+surface_nonech <- donnee_prelev %>%
+  group_by(COMMUNE) %>%
+  summarise(Surface_ech = sum(Surface, na.rm = TRUE)) %>% # calcul de la surface échantillonnée par commune
+  ungroup() %>%
+  inner_join(surface_agrume) %>% # surface totale en agrume par commune
+  mutate(
+    Surface = Surface_tot - Surface_ech, # surface non échantilonnée par commune
+    Maladie = "Non_ech"
+  ) %>%
+  dplyr::select(COMMUNE, Maladie, Surface) %>%
+  suppressMessages() # join() message
+
+donnee_prelev %>%
+  group_by(COMMUNE, Maladie) %>%
+  summarise(Surface = sum(Surface)) %>%
+  ungroup() %>%
+  suppressMessages() %>%  # summarise() message
+  bind_rows(surface_nonech) %>%
+  ggplot() +
+  aes(x = COMMUNE %>% forcats::fct_reorder(Surface, .fun = sum), y = Surface, fill = Maladie %>% forcats::fct_relevel("Non_ech")) +
+  geom_col(position = ifelse(stack_fill, "fill", "stack"), width = 0.7) +
+  coord_flip() +
+  scale_fill_manual(values = couleurs_barplot, labels = labels_barplot) +
+  labs(y = ifelse(stack_fill, "Surface en agrumes (%)", "Surface en agrumes (hectares)"), x = "", fill = "Etat de la parcelle") + # textui
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+
+
+
+
+
+
+
 
 
 
@@ -181,17 +285,17 @@ kernel_hlb <- raster(list(x = kernel_hlu$x , y = kernel_hlu$y, z = kernel_hlu$z 
 #   # na.color = "transparent"
 #   )
 
-pal_hlb <- colorQuantile(
-  c("transparent", "transparent", "transparent", "transparent", "grey", "#FAB964", "#eb8200", "red"),
-  domain = kernel_hlb@data@values,
-  n = 50,
-  alpha = TRUE
-)
+# pal_hlb <- colorQuantile(
+#   c("transparent", "transparent", "transparent", "transparent", "grey", "#FAB964", "#eb8200", "red"),
+#   domain = kernel_hlb@data@values,
+#   n = 50,
+#   alpha = TRUE
+# )
 # transparence jusqu'à la médiane
 # dégradé du gris au rouge jusqu'à la densité maximale interpolée
 # une couleur = quantile à 5% NON
 
-median(kernel_hlb@data@values)
+# median(kernel_hlb@data@values)
 # kernel_hlb@data@values[which(kernel_hlb@data@values < 0.01)] <- NA
 # pal_hlb <- colorNumeric(
 #   c("grey", "#eb8200", "red"),
@@ -209,10 +313,17 @@ leaflet(options = leafletOptions(maxZoom = 14, zoomControl = FALSE)) %>% # maxzo
     kernel_hlb,
     # colors = pal_hlb
     # colors = "inferno",
-    colors = colorNumeric("magma", reverse = TRUE, domain = kernel_hlb@data@values, na.color = "transparent"),
-    # colors = "Reds",
+    # colors = colorNumeric("magma", reverse = TRUE, domain = kernel_hlb@data@values, na.color = "transparent"),
+    colors = "Reds",
     opacity = .7
-    ) #%>%
+    ) %>%
+  addPolygons(
+    data = communes,
+    color = "#000",
+    fillOpacity = 0,
+    popup =  ~ COMMUNE,
+    weight = 2
+  ) #%>%
   # addLegend(
   #   title = "Densité de HLB", # textui (que mettre qui ait du sens ? probabilité ?)
   #   pal = pal_hlb,

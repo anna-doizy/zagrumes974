@@ -3,7 +3,7 @@
 \docType{data}
 \name{hlu}
 \alias{hlu}
-\title{Raw data of the presence of the disease for the interpolation}
+\title{Data with positive HLB samplings for the interpolation}
 \format{
 data.frame 616x4
 \describe{
@@ -16,6 +16,6 @@ data.frame 616x4
 hlu
 }
 \description{
-Raw data of the presence of the disease for the interpolation
+The sampling may have occured in a plot of not.
 }
 \keyword{datasets}

@@ -19,28 +19,20 @@
 #' }
 "textesUI"
 
-#' Raw data of the presence of the disease for the barplot
+#' Presence of the disease per plot for the barplot
+#' 
+#' Several HLB samplings on the same plot may be possible, but if only one is positive, the whole plot is considered positive.
 #'
-#' @format data.frame 267x7
+#' @format data.frame 334x7
 #' \describe{
 #'   \item{Id}{Plot identifier}
 #'   \item{X, Y}{WGS84 coordinates of the plot barycentre}
-#'   \item{Surface}{Area of the plot in square meters}
-#'   \item{Altitude}{Elevation of the plot}
-#'   \item{Maladie}{Presence (1) or absence (0) of the disease}
+#'   \item{Surface}{Area of the plot in hectares}
+#'   \item{Maladie}{Presence (Malade) or absence (Sain) of the disease}
 #'   \item{Date}{Date of the observation}
+#'   \item{COMMUNE}{Municipality of the observation}
 #' }
 "prelev"
-
-
-#' polygon simple feature collection containing the municipalities of Reunion island
-#'
-#' @format sf with 24 municipalities and 1 field
-#' \describe{
-#'   \item{COMMUNE}{Municipality name}
-#' }
-"communes"
-
 
 #' Dataframe with the total citrus plot area per commune
 #'
@@ -51,7 +43,17 @@
 #' }
 "surface_agrume"
 
-#' Barycentres of the citrus plots in Reunion
+#' Polygon simple feature collection containing the shapes of the municipalities of Reunion island
+#'
+#' @format sf with 24 municipalities and 1 field
+#' \describe{
+#'   \item{COMMUNE}{Municipality name}
+#' }
+#' 
+#' @import sf
+"communes"
+
+#' Barycentres of the known citrus plots in Reunion
 #'
 #' @format data.frame 782x3
 #' \describe{
@@ -60,7 +62,9 @@
 #' }
 "par"
 
-#' Raw data of the presence of the disease for the interpolation
+#' Data with positive HLB samplings for the interpolation
+#' 
+#' The sampling may have occured in a plot of not.
 #'
 #' @format data.frame 616x4
 #' \describe{

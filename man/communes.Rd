@@ -3,7 +3,7 @@
 \docType{data}
 \name{communes}
 \alias{communes}
-\title{polygon simple feature collection containing the municipalities of Reunion island}
+\title{Polygon simple feature collection containing the shapes of the municipalities of Reunion island}
 \format{
 sf with 24 municipalities and 1 field
 \describe{
@@ -14,6 +14,6 @@ sf with 24 municipalities and 1 field
 communes
 }
 \description{
-polygon simple feature collection containing the municipalities of Reunion island
+Polygon simple feature collection containing the shapes of the municipalities of Reunion island
 }
 \keyword{datasets}

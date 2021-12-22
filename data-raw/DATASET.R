@@ -16,20 +16,14 @@ devtools::document()
 
 library(dplyr)
 
-set.seed(562)
+# une ligne par parcelle échantillonnée 
+# plusieurs prélèvements sur la même parcelle pouvant être possible, si un seul est positif, la parcelle entière est considérée comme positive.
 
-prelev <- readr::read_csv2("data-raw/data_agrumile.csv") %>% 
-  filter(!is.na(Date)) %>% 
-  select(-Type) %>% 
-  st_as_sf(coords=c('X', 'Y'), crs = st_crs(communes), remove = FALSE) %>% 
-  st_intersection(communes) %>%
-  as_tibble() %>% 
+prelev <- readr::read_csv2("data-raw/parcelles_prelevee.csv") %>% 
+  filter(!is.na(Date)) %>% # une date manquante
   mutate(
     Date = lubridate::dmy(Date),
-    Maladie = factor(Maladie, labels = c("Sain", "Malade")),
-    X = X + rnorm(n(), sd = 0.01), # anonymisation
-    Y = Y + rnorm(n(), sd = 0.01),
-    Surface = Surface / 10000 # conversion m² -> ha
+    Maladie = factor(Maladie, labels = c(`0` = "Sain", `1` = "Malade"))
   )
 
 
@@ -59,18 +53,12 @@ communes <- read_sf("data-raw/communes.shp") %>%
 par <- read.csv2("data-raw/justagru.csv")
 
 # présence de HLB
-hlu <- read.csv2("data-raw/hlbposi.csv") %>%  
-  mutate(date = lubridate::dmy(date)) #%>% 
-  # filter(between(date, as.Date("2019-06-25"), as.Date("2020-05-29")))
-# a faire : ajouter la colonne date pour pouvoir trier par date
+# une ligne par analyse HLB positive avec ses coordonnées (le prélèvement s'est fait sur une parcelle ou non)
 
-# limites <- c(55.2, 55.85, -21.45, -20.85)
-
-# kernel_par <- kde2d(par$longitude, par$latitude, n = 200, lims = limites)
-# kernel_hlu <- kde2d(hlu$longitude, hlu$latitude, n = 200, lims = limites)
-
-# raster_agrumes <- raster(kernel_par)
-# raster_hlb <- raster(list(x = kernel_hlu$x , y = kernel_hlu$y, z = kernel_hlu$z / (kernel_par$z + 50)))
+hlu <- read.csv2("data-raw/hlu.csv") %>%  
+  mutate(date = lubridate::dmy(date)) %>% 
+  filter(HLB == 1) %>% 
+  dplyr::select(-HLB)
 
 usethis::use_data(communes, par, hlu, overwrite = TRUE)
 devtools::document() # modifier R/data.R

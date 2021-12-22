@@ -3,7 +3,7 @@
 \docType{data}
 \name{par}
 \alias{par}
-\title{Barycentres of the citrus plots in Reunion}
+\title{Barycentres of the known citrus plots in Reunion}
 \format{
 data.frame 782x3
 \describe{
@@ -15,6 +15,6 @@ data.frame 782x3
 par
 }
 \description{
-Barycentres of the citrus plots in Reunion
+Barycentres of the known citrus plots in Reunion
 }
 \keyword{datasets}
