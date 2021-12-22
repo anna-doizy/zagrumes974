@@ -10,10 +10,8 @@
 
 ***
 
-<!-- - Contact email: ipsim-chayote@cirad.fr   -->
-<!-- - Developped at CIRAD by [Anna Doizy](doana-r.com), Isaure Païtard, Frederic Chiroleu and Jean-Philippe Deguine   -->
-<!-- - Associated publication: [Qualitative modeling of fruit fly injuries on chayote in Réunion: Development and transfer to users](https://doi.org/10.1016/j.cropro.2020.105367)   -->
-
+- Contact email: [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr)
+- Developped by [Anna Doizy](https://doana-r.com)
 
 
 ## Online usage
@@ -27,10 +25,10 @@
 
 ## Local usage
 
-You can install **{zagrumes974}** R package from [gitlab](https://gitlab.com/doana-r/zagrumes974) with:
+You can install **{zagrumes974}** R package from [gitlab](https://gitlab.com/cirad-apps/zagrumes974) with:
 
 ``` r
-remotes::install_gitlab("doana-r/zagrumes974")
+remotes::install_gitlab("cirad-apps/zagrumes974")
 ```
 
 
