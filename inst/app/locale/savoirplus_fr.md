@@ -1,6 +1,6 @@
 ## Nous contacter
 
-Si vous avez des suggestions, des remarques ou autres diverses question, n'hésitez pas à nous contacter à [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr).
+Si vous avez des suggestions, des remarques ou autres diverses questions, n'hésitez pas à nous contacter à [zagrumes974@cirad.fr](mailto:zagrumes974@cirad.fr).
 
 <br>
 
@@ -22,12 +22,15 @@ Une autre partie des données provient des programmes de recherche de l'UMR PVBM
 
 La **conception, la création et la réalisation de l’interface web** ont été coordonnées par Anna Doizy ([DoAna - Statistiques Réunion](https://doana-r.com)).
 
-L'**hébergement et la maintenance** de l'application sont assurées par XXX et Anna Doizy.
+L'**hébergement et la maintenance** de l'application sont assurées par le CIRAD et Anna Doizy.
 
-La **traduction en anglais** a été assurée par Anna Doizy et corrigée par XXX.
+La **traduction en anglais** a été faite par Anna Doizy.
+
+<!--
+et corrigée par XXX.
 
 Merci aux bêta-testeurs de l'application : XXX.
-
+-->
 <br>
 
 > *Que toutes les contributrices et tous les contributeurs soient ici remercié(e)s !* 

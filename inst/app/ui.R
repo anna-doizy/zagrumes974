@@ -29,7 +29,6 @@ function(req) {
 
   # TITLE -------------------------------------------------------------------
 
-  # header <- dashboardHeader(title = HTML(textesUI[[lang]][textesUI$id == "titre"])) # mettre une image ?
   header <- dashboardHeader(title = a(href = paste0("./?lang=", lang), img(src="title-zagrumes974.png", width = 190)))
 
   # SIDEBAR -----------------------------------------------------------------
@@ -59,12 +58,7 @@ function(req) {
           tabName = onglets$id[tab],
           icon = icon(onglets$icon[tab])
         )
-      })#,
-      # menuItem(
-      #   text = strong(textesUI[[lang]][textesUI$id == "contact"]),
-      #   href = "mailto:zagrumes974@cirad.fr",
-      #   icon = icon("at")
-      # )
+      })
     )
   )
 
@@ -92,69 +86,23 @@ function(req) {
       ))
 
       
-      # Onglet le HLB à la RUN ####
-      # , tabItem(tabName = "situation", fluidRow(
-      #   leafletOutput("situation_map"),
-      #   
-      #   absolutePanel( # peut-être faire deux boîtes pour le responsiveness ???
-      #     id = "controls", class = "panel panel-default", fixed = FALSE,
-      #     draggable = TRUE, top = 60, left = "auto", right = 20, bottom = "auto",
-      #     width = 400, height = "auto",
-      #     
-      #     p(),
-      #     
-      #     ## time
-      #     sliderInput(
-      #       "periode",
-      #       label = strong("Choix de la période"), # textui
-      #       min = min(prelev$Date),
-      #       max = max(prelev$Date),
-      #       value = range(prelev$Date),
-      #       timeFormat = "%m/%Y", # lang "%Y-%m"
-      #       ticks = FALSE
-      #     ),
-      #     
-      #     # elevation
-      #     sliderInput(
-      #       "altitude",
-      #       label = strong("Choix de l'altitude"), # textui
-      #       min = 0,
-      #       max = 3000,
-      #       value = c(0, 3000),
-      #       ticks = FALSE
-      #     ),
-      #     
-      #     ## temporal evolution
-      #     p(strong("Surface échantillonnée par commune")), # textui
-      #     echarts4rOutput("surf_commune", height = "auto"),
-      #     
-      #     br(),
-      #     ## pluviométrie
-      #     p(strong("Pluviométrie médiane de 1986 à 2016")), # textui
-      #     checkboxInput("pluvio_check", label = "Afficher la pluviométrie annuelle", value = FALSE)
-      #   ), # end of absolute panel
-      # 
-      # ))
-      
       , tabItem(tabName = "situation", fluidRow(
         column(
           width = 7,
           box(
-            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Carte présentant la situation connue actuelle du HLB à la Réunion")), # tesxtui
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em(textesUI[[lang]][textesUI$id == "situation_box_map"])),
             leafletOutput("situation_map"))
-            # icon("question-circle"),
-            # "Les prélèvements géolocalisés étant des données personnelles, ici nous extrapolons de ces données les zones de présence du HLB à la Réunion." # textui
         ),
         
         column(
           width = 5,
           box(
-            status = "success", width = 12, solidHeader = FALSE, title = strong(em("A vous d'explorer !")), # textui
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em(textesUI[[lang]][textesUI$id == "situation_box_explore"])),
             
             # cocher si on veut voir la surface en ha ou en %
             materialSwitch(
               "agrumes_hlb",
-              label = strong("Densité en agrumes / Densité en HLB") # textui
+              label = strong(textesUI[[lang]][textesUI$id == "situation_agrumes_hlb"])
             ),
             
             br(),
@@ -162,11 +110,11 @@ function(req) {
             ## time ####
             sliderInput(
               "periode",
-              label = strong("Choix de la période"), # textui
+              label = strong(textesUI[[lang]][textesUI$id == "situation_periode"]),
               min = min(prelev$Date),
               max = max(prelev$Date),
               value = range(prelev$Date),
-              timeFormat = "%m/%Y", # lang "%Y-%m"
+              timeFormat = textesUI[[lang]][textesUI$id == "time_format"],  #"%m/%Y", # lang "%Y-%m"
               width = "80%",
               ticks = FALSE
             ),
@@ -178,23 +126,11 @@ function(req) {
             # cocher si on veut voir la surface en ha ou en %
             materialSwitch(
               "stack_fill",
-              label = strong("Surface en hectare / pourcentage") # textui
+              label = strong(textesUI[[lang]][textesUI$id == "situation_stackfill"])
             ),
-            
-            # # elevation
-            # sliderInput(
-            #   "altitude",
-            #   label = strong("Choix de l'altitude"), # textui
-            #   min = 0,
-            #   max = 3000,
-            #   value = c(0, 3000),
-            #   width = "80%",
-            #   ticks = FALSE
-            # ),
-            
-            
+
             ## temporal evolution ####
-            p(strong("Surface échantillonnée par commune")), # textui
+            p(strong(textesUI[[lang]][textesUI$id == "situation_plot"])),
             plotOutput("surf_commune")
             
           ) # end of box
@@ -207,23 +143,22 @@ function(req) {
         column(
           width = 7,
           box(
-            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Modéliser une épidémie")), # textui
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em(textesUI[[lang]][textesUI$id == "modele_box_desc"])),
             
             includeMarkdown(sprintf("locale/explication-modele_%s.md", lang)), # EN
             
-            # ici les inputs
-            # ATTENTION textui
+            # inputs
             
             column(
               width = 6,
-              radioButtons("r0", label = "R0 (taux de reproduction de la maladie)", choices = c(1, 5), inline = TRUE),
-              radioButtons("seuil", label = "Seuil de transmission", choiceValues = c(0, 5000), choiceNames = c("transmission non limitée par la distance", "pas de transmission au delà de 5 kilomètres")),
+              radioButtons("r0", label = textesUI[[lang]][textesUI$id == "modele_r0"], choices = c(1, 5), inline = TRUE),
+              radioButtons("seuil", label = textesUI[[lang]][textesUI$id == "modele_seuil"], choiceValues = c(0, 5000), choiceNames = c(textesUI[[lang]][textesUI$id == "modele_seuil0"], textesUI[[lang]][textesUI$id == "modele_seuil5"])),
               ),
             
             column(
               width = 6,
-              radioButtons("effort", label = "Fréquence d'arrachage des arbres malades (en jours)", choices = c(30, 365), inline = TRUE),
-              radioButtons("duree", label = "Durée de la simulation (en jours)", choices = c(100, 365), inline = TRUE)
+              radioButtons("effort", label = textesUI[[lang]][textesUI$id == "modele_effort"], choices = c(30, 365), inline = TRUE),
+              radioButtons("duree", label = textesUI[[lang]][textesUI$id == "modele_duree"], choices = c(100, 365), inline = TRUE)
             )
 
             
@@ -233,10 +168,10 @@ function(req) {
         column(
           width = 5,
           box(
-            status = "success", width = 12, solidHeader = FALSE, title = strong(em("Evolution de l'épidémie sur un parcellaire fictif")), # textui
+            status = "success", width = 12, solidHeader = FALSE, title = strong(em(textesUI[[lang]][textesUI$id == "modele_box_evolution"])),
             
-            imageOutput("simu_graph"), # A FAIRE rendre responsive
-            imageOutput("simu_gif", height = "700px") # A FAIRE rendre responsive
+            imageOutput("simu_graph"),
+            imageOutput("simu_gif", height = "700px")
             
             
           ) # end of box

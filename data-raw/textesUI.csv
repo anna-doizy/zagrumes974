@@ -1,3 +1,22 @@
 id,fr,en
-titre,Zagrumes974, Zagrumes974
-contact,Nous contacter,Contact us
+situation_box_map,Carte présentant la situation connue actuelle du HLB à la Réunion,Map of the known current situation of HLB in Reunion
+situation_box_explore,À vous d'explorer !,It's your turn to explore!
+situation_agrumes_hlb,Densité en agrumes / Densité en HLB,Density in citrus / Density in HLB
+situation_periode,Choix de la période,Choice of the period
+time_format,%m/%Y,%Y-%m
+situation_stackfill,Surface en hectare / pourcentage,Area in hectares / percentage
+situation_plot,Surface échantillonnée par commune,Sampled area per municipality
+situation_plot_sain,Saine,Healthy
+situation_plot_malade,Malade,Unhealthy
+situation_plot_nonech,Non échantillonnée,Not sampled
+situation_plot_ystack,Surface en agrumes (%),Citrus area (%)
+situation_plot_yfill,Surface en agrumes (hectares),Citrus area (hectares)
+situation_plot_legend,Etat de la parcelle,Status of the plot
+modele_box_desc,Modéliser une épidémie,Modelling an epidemic
+modele_box_evolution,Evolution de l'épidémie sur un parcellaire fictif,Evolution of the epidemic on a fictitious plot
+modele_r0,R0 (taux de reproduction de la maladie),R0 (basic reproduction number)
+modele_seuil,Seuil de transmission,Transmission threshold
+modele_seuil0,transmission non limitée par la distance,transmission not limited by distance
+modele_seuil5,pas de transmission au delà de 5 kilomètres,no transmission beyond 5 kilometres
+modele_effort,Fréquence d'arrachage des arbres malades (en jours),Removal frequency of diseased trees (in days)
+modele_duree,Durée de la simulation (en jours),Duration of simulation (in days)

@@ -9,23 +9,17 @@ Elle s’adresse principalement aux acteurs de la surveillance mais est accessib
 
 Cette page d’**Accueil** introduit la biologie de la maladie HLB.
 
+L’onglet **Le HLB à la Réunion** vous montre une carte interactive de la présence du HLB à la Réunion par période, altitude et commune.
 
-L’onglet **Le HLB à la Réunion** vous montre une carte interactive de la présence du HLB à la
-Réunion par période, altitude et commune.
+La page **Modéliser une épidémie** propose différents jeux de paramètres afin de simuler la propagation d’une maladie similaire au HLB dans un parcellaire fictif à des fins pédagogiques.
 
-
-La page **Modéliser une épidémie** propose différents jeux de paramètres afin de simuler la
-propagation d’une maladie similaire au HLB dans un parcellaire fictif à des fins pédagogiques.
-
-
-Dans **A propos**, vous trouverez les liens pour approfondir votre recherche ainsi que les différents
-acteurs ayant participé à ces travaux.
+Dans **A propos**, vous trouverez les liens pour approfondir votre recherche ainsi que les différents acteurs ayant participé à ces travaux.
 
 
 
 ## Contexte
 
-Le **greening**, ou **Huanglongbing** (HLB) ou encore maladie de la pousse jaune est une maladie bactérienne transmisse par des vecteurs insectes, qui touche les agrumes. Le HLB a été signalé pour la première fois en Chine en 1943 et s’est vite répandue à l’échelle du globe.
+Le **greening**, ou **Huang Long Bing** (HLB) ou encore maladie de la pousse jaune est une maladie bactérienne transmise par des vecteurs insectes, qui touche les agrumes. Le HLB a été signalé pour la première fois en Chine en 1943 et s’est vite répandu à l’échelle du globe.
 
 <p class="center">
   <img src="carte.jpg" class="responsive-img">
@@ -88,7 +82,7 @@ Depuis 2015, de nouveaux cas de HLB ont été observés sur l’île. Les parasi
 
 *** 
 
-Dernière mise à jour : 2021-12-22
+Dernière mise à jour : 2022-01-10
 
 Logo ©[DoAna](https://doana-r.com)  
 Photographies : © Romuald Fontaine, FDGDON ; Gilles Cellier et Bruno Hostachy, Anses ; Antoine Franck, CIRAD.

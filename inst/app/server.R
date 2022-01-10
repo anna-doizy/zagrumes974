@@ -131,7 +131,11 @@ server <- function(input, output, session) {
   output$surf_commune <- renderPlot(res = 100, {
     
     couleurs_barplot <- c(Sain = "#16771f", Malade = "#eb8200", Non_ech = "#c6baa0")
-    labels_barplot <- c(Sain = "Saine", Malade = "Malade",  Non_ech = "Non échantillonnée") # textui
+    labels_barplot <- c(
+      Sain = textesUI[[lang]][textesUI$id == "situation_plot_sain"], 
+      Malade = textesUI[[lang]][textesUI$id == "situation_plot_malade"],  
+      Non_ech = textesUI[[lang]][textesUI$id == "situation_plot_nonech"]
+      )
     
     
     surface_nonech <- prelev_sel() %>%
@@ -159,7 +163,11 @@ server <- function(input, output, session) {
         geom_col(position = ifelse(input$stack_fill, "fill", "stack"), width = 0.7) +
         coord_flip() +
         scale_fill_manual(values = couleurs_barplot, labels = labels_barplot) + 
-        labs(y = ifelse(input$stack_fill, "Surface en agrumes (%)", "Surface en agrumes (hectares)"), x = "", fill = "Etat de la parcelle") + # textui
+        labs(
+          y = ifelse(input$stack_fill, textesUI[[lang]][textesUI$id == "situation_plot_ystack"], textesUI[[lang]][textesUI$id == "situation_plot_yfill"]), 
+          x = "", 
+          fill = textesUI[[lang]][textesUI$id == "situation_plot_legend"]
+          ) +
         theme_minimal() +
         theme(legend.position = "top")
     

@@ -1,25 +1,23 @@
 
-
-La carte ci-contre représente des interpolations de densité en agrumes ou en maladie. 
-Plus les couleurs sont chaudes, plus la densité est élevée.
-
-
-#### Densité en agrumes
-
-Estimation de la **densité en parcelles d'agrumes** cultivées à la Réunion.
-Celle-ci ne varie pas avec le temps.
+The map on the right shows density interpolations in citrus or disease. 
+The warmer the colours, the higher the density.
 
 
-#### Densité en HLB
+#### Citrus density
 
-Estimation de **la densité de cas positifs au HLB par rapport à la densité en agrumes en chaque point du paysage**. 
-Cette carte est à interpréter au regard de la densité en agrumes car les zones peu denses peuvent être, soit des zones agrumicoles épargnées par le HLB, soit des zones sans agrumes et donc sans HLB.
+Estimation of the **density of citrus plots** cultivated in Réunion.
+This does not vary with time.
+
+
+#### Density of HLB
+
+Estimation of the **density of HLB positive cases in relation to the density of citrus trees at each point of the landscape**. 
+This map should be interpreted in relation to the density of citrus trees, as the less dense areas may be either citrus-growing areas spared from HLB, or areas without citrus trees and therefore without HLB.
 
 
 
 ***
 
-Le graphique ci-dessous représente l'état sanitaire connu du parcellaire agrumicole en 2020.
-
+The graph below represents the known health status of the citrus plot in 2020.
 
 

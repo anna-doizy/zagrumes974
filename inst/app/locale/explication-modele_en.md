@@ -1,47 +1,47 @@
-Nous vous proposons ici de présenter les résultats d'un **modèle de développement d’une épidémie de HBL dans un parcellaire d'agrumes fictif**. 
+Here we present the results of a **model for the development of an HBL epidemic in a fictitious citrus plot**. 
 
-### Mise en place et définition
+### Setting up and definition
 
-Le parcellaire fictif fait 67 kilomètres de côté. Il contient 500 parcelles dont les surfaces varient entre 0 et 7 hectares.
+The fictitious plot is 67 km square. It contains 500 plots with areas ranging from 0 to 7 hectares.
 
-Malgré le choix de représentation avec des gros points, notez bien que les parcelles ne se touchent pas. Elles sont éloignées au moins de 60 mètres les unes des autres.
+Despite the choice of representation with large dots, note that the plots do not touch each other. They are at least 60 metres apart.
 
-Nous définissons l'**état sanitaire** d'une parcelle de la manière suivante :
+We define the **health status** of a plot as follows:
 
-- **saine** : le HLB n'est pas présent dans la parcelle (vert)
-- **infectée** : le HLB est présent dans la parcelle, mais ne diffuse pas encore aux autres parcelles alentour (orange)
-- **infectieuse** : la maladie présente dans la parcelle se transmet aux parcelles alentour (rouge)
-- **arrachée** : la parcelle a été arrachée (noir)
+- **healthy**: HLB is not present in the plot (green / saine)
+- **infected**: HLB is present in the plot, but has not yet spread to other plots in the vicinity (orange / infectée)
+- **infective**: the disease present in the plot is spreading to the surrounding plots (red / infectieuse)
+- **uprooted**: the plot has been uprooted (black / arrachée)
 
-NB : Un arbre infecté finira par mourir que ce soit en plusieurs mois ou quelques années. 
-Ici, les temps de simulations sont trop courts pour que la possibilité d’une mort autre que par arrachage soit constatée.
-
-
-### Initialisation du modèle
-
-Une parcelle est infectée par le HLB au jour 1.
+NB: An infected tree will eventually die, whether it takes several months or a few years. 
+Here, the simulation times are too short for the possibility of death other than by uprooting to be observed.
 
 
-### Evolution du modèle
+### Initialization of the model
 
-Tous les jours, chaque parcelle contenant un arbre malade va en contaminer d'autres. 
-
-- Le paramètre **R0** ([nombre de reproduction de base](https://fr.wikipedia.org/wiki/Nombre_de_reproduction_de_base)) permet de fixer combien de parcelles sont contaminées en moyenne par un arbre malade. Nous avons choisi `R0 = 1` par défaut.
-
-- Le paramètre **Seuil de transmission** permet de moduler la distance maximale de transmission de la maladie par un arbre infecté. Par défaut, il n'y a `pas de distance limite` de transmission.
-
-- Le paramètre **Fréquence d'arrachage** représente l'effort de la gestion de la maladie. Ces mesures sont effectuées en réalité soit par les services de l’état, soit par l’agriculteur. Par défaut, une parcelle contenant un arbre infecté est arrachée aléatoirement tous les `30 jours`.
-
-- Le paramètre **Durée de la simulation** fixe la fin de la simulation. Par défaut, elle s'arrête au bout de `100 jours`.
+A plot is infected with HLB on day 1.
 
 
-### Représentation des résultats du modèle
+### Model evolution
 
-- Le premier graphique montre l'évolution de l'état sanitaire des 500 parcelles au cours de la simulation.
+Every day, each plot containing a diseased tree will infect others. 
 
-- En-dessous, vous pouvez observer la carte du parcellaire qui évolue au fil des jours.
-  Chaque point représente une parcelle d'agrumes.
+- The **R0** parameter ([basic reproduction number](https://en.wikipedia.org/wiki/Basic_reproduction_number)) is used to determine how many plots are contaminated on average by a diseased tree. We chose `R0 = 1` by default.
+
+- The **Transmission threshold** allows to modulate the maximum distance of transmission of the disease by an infected tree. By default, there is `no limit` to the transmission distance.
+
+- The **Removal frequency** represents the effort of disease management. These measurements are actually carried out either by the state services or by the farmer. By default, a plot containing an infected tree is randomly uprooted every `30 days`.
+
+- The **Simulation duration** sets the end of the simulation. By default, it stops after `100 days`.
+
+
+### Representation of the model results
+
+- The first graph shows the evolution of the health status of the 500 plots during the simulation.
+
+- Below, you can see the map of the plot that evolves over the days.
+  Each point represents a citrus plot.
 
 ***
 
-> ***Amusez-vous à jouer sur quelques valeurs des paramètres du modèle pour voir comment cela impacte la propagation de la maladie !***
+> Have fun playing around with some of the model parameters to see how this affects the spread of the disease!
